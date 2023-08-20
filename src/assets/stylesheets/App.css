@@ -8,7 +8,7 @@
     background: lightgray;
     border-radius: 50px;
     padding: 1em 2em;
-    width: 100%;
+    width:auto;
 }
 
 .search-icon{
@@ -16,7 +16,7 @@
 }
 
 .pokemons{
-    margin-top:10em;
+    margin-top:7em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -32,6 +32,15 @@
 
 .App{
     padding-top: 5em;
-    padding-left : 10em;
+    padding-left : 5em;
     padding-right: 5em;
+}
+
+.type-list{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-bottom: 20px;
+    overflow-x: scroll;
+
 }

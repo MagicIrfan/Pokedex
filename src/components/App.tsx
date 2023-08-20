@@ -3,6 +3,7 @@ import '../assets/stylesheets/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import PokemonList from "./pokemonlist";
+import Types from "./types";
 
 const App : React.FC = () => {
   return (
@@ -12,7 +13,8 @@ const App : React.FC = () => {
         <FontAwesomeIcon className={"search-icon"} icon={icon({name: 'magnifying-glass', style:'solid'})} />
         <input className={"search-poke"} type={"text"} placeholder={"Search a pokémon !"}/>
       </div>
-      <PokemonList></PokemonList>
+        <Types></Types>
+        <PokemonList></PokemonList>
     </div>
   );
 }
