@@ -7,6 +7,31 @@
 .search{
     background: lightgray;
     border-radius: 50px;
-    padding: 4px 8px;
-    width: fit-content;
+    padding: 1em 2em;
+    width: 100%;
+}
+
+.search-icon{
+    margin-right: 2px;
+}
+
+.pokemons{
+    margin-top:10em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.pokemon{
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 4px;
+}
+
+.App{
+    padding-top: 5em;
+    padding-left : 10em;
+    padding-right: 5em;
 }
