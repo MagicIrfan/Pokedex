@@ -2,6 +2,7 @@
     background: none;
     border:none;
     outline: none;
+    width:98%;
 }
 
 .search{
@@ -16,7 +17,7 @@
 }
 
 .pokemons{
-    margin-top:7em;
+    margin-top:3em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -25,9 +26,11 @@
 }
 
 .pokemon{
+    width:14em;
     border-radius: 10px;
     border: 1px solid lightgray;
-    padding: 4px;
+    padding-right: 14px;
+    padding-left: 14px;
 }
 
 .App{
@@ -42,5 +45,42 @@
     gap: 10px;
     padding-bottom: 20px;
     overflow-x: scroll;
+}
 
+.type-button{
+    min-width: 6em;
+    max-width: 6em;
+    height: 3em;
+    background: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 5px gray;
+}
+
+.poke-number{
+    text-align: end;
+    margin-right: 2px;
+    font-size: 18px;
+}
+
+.type{
+    width: 4em;
+    background-color:lightgray;
+    border-radius:12px;
+    padding: 5px;
+}
+
+.poke-body{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.poke-types{
+    width: 50%;
+    text-align: center;
+}
+
+.poke-image{
+    width: 50%;
 }

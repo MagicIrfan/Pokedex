@@ -7,7 +7,7 @@ const Types : React.FC = () => {
         const components = [];
 
         for (let i = 0; i < numberOfTimes; i++) {
-            components.push(<button key={i}>Oui</button>);
+            components.push(<button key={i} className={"type-button"}>Oui</button>);
         }
 
         return components;
