@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import image from "../assets/images/image.png"
+import pokeball from "../assets/images/pokeball.png";
 
 const Pokemon : React.FC = () => {
+
+    useEffect(() => {
+
+    }, []);
+
     return (
         <div className="pokemon">
             <p className={"poke-number"}>#001</p>

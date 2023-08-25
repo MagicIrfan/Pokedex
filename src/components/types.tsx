@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Pokemon from "./pokemon";
+import {getTypes} from "../services/typeservice";
+import PokeType from "../models/type";
 const Types : React.FC = () => {
-    const numberOfTimes = 100;
 
-    const renderMyComponentMultipleTimes = () => {
-        const components = [];
+    const [types, setTypes] = useState<PokeType[]>([]);
 
-        for (let i = 0; i < numberOfTimes; i++) {
-            components.push(<button key={i} className={"type-button"}>Oui</button>);
+    useEffect(() => {
+        const init = async () => {
+            const fetchTypes = await getTypes()
+            if(fetchTypes.status === 200){
+                let temp : PokeType[] = [];
+                fetchTypes.data.results.forEach((type : PokeType) =>  {
+                    temp.push(type)
+                });
+                setTypes(temp)
+            }
         }
-
-        return components;
-    };
+        init();
+    }, [types]);
+    const listItems = types.map(type => <button className={"type-button " + (type.name)}>{type.name.toUpperCase()}</button>);
     return (
         <div className={"types"}>
             <h1>Types</h1>
             <div className={"type-list"}>
-                {renderMyComponentMultipleTimes()}
+                {listItems}
             </div>
         </div>
     );

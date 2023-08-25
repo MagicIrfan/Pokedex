@@ -1,3 +1,25 @@
+/* Couleurs de type Pokémon */
+:root {
+    --normal-color: #A8A77A;
+    --fire-color: #EE8130;
+    --water-color: #6390F0;
+    --electric-color: #F7D02C;
+    --grass-color: #7AC74C;
+    --ice-color: #96D9D6;
+    --fighting-color: #C22E28;
+    --poison-color: #A33EA1;
+    --ground-color: #E2BF65;
+    --flying-color: #A98FF3;
+    --psychic-color: #F95587;
+    --bug-color: #A6B91A;
+    --rock-color: #B6A136;
+    --ghost-color: #735797;
+    --dragon-color: #6F35FC;
+    --dark-color: #705746;
+    --steel-color: #B7B7CE;
+    --fairy-color: #D685AD;
+}
+
 .search-poke{
     background: none;
     border:none;
@@ -27,10 +49,16 @@
 
 .pokemon{
     width:14em;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid lightgray;
     padding-right: 14px;
     padding-left: 14px;
+    transition-timing-function: ease;
+    transition-duration: 0.7s;
+}
+
+.pokemon-hover{
+
 }
 
 .App{
@@ -52,9 +80,10 @@
     max-width: 6em;
     height: 3em;
     background: none;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 3px 5px gray;
+    border: 2px solid black;
+    border-radius: 20px;
+    transition-timing-function: ease;
+    transition-duration: 0.7s;
 }
 
 .poke-number{
@@ -84,3 +113,269 @@
 .poke-image{
     width: 50%;
 }
+
+.pokeball-img{
+    position: relative;
+    bottom: 110px;
+    left: 50px;
+}
+
+.normal {
+    background-color: var(--normal-color);
+    color:black;
+}
+
+.fire {
+    background-color: var(--fire-color);
+    color:black;
+}
+
+.water {
+    background-color: var(--water-color);
+    color:black;
+}
+
+.electric {
+    background-color: var(--electric-color);
+    color:black;
+}
+
+.grass {
+    background-color: var(--grass-color);
+    color:black;
+}
+
+.ice {
+    background-color: var(--ice-color);
+    color:black;
+}
+
+.fighting {
+    background-color: var(--fighting-color);
+    color:black;
+}
+
+.poison {
+    background-color: var(--poison-color);
+    color:black;
+}
+
+.ground {
+    background-color: var(--ground-color);
+    color:black;
+}
+
+.flying {
+    background-color: var(--flying-color);
+    color:black;
+}
+
+.psychic {
+    background-color: var(--psychic-color);
+    color:black;
+}
+
+.bug {
+    background-color: var(--bug-color);
+    color:black;
+}
+
+.rock {
+    background-color: var(--rock-color);
+    color:black;
+}
+
+.ghost {
+    background-color: var(--ghost-color);
+    color:white;
+}
+
+.dragon {
+    background-color: var(--dragon-color);
+    color:white;
+}
+
+.dark {
+    background-color: var(--dark-color);
+    color:white;
+}
+
+.steel {
+    background-color: var(--steel-color);
+    color:black;
+}
+
+.fairy {
+    background-color: var(--fairy-color);
+    color:black;
+}
+
+.type-button.normal {
+    box-shadow: 3px 5px var(--normal-color);
+}
+
+.type-button.fire {
+    box-shadow: 3px 5px var(--fire-color);
+}
+
+.type-button.water {
+    box-shadow: 3px 5px var(--water-color);
+}
+
+.type-button.electric {
+    box-shadow: 3px 5px var(--electric-color);
+}
+
+.type-button.grass {
+    box-shadow: 3px 5px var(--grass-color);
+}
+
+.type-button.ice {
+    box-shadow: 3px 5px var(--ice-color);
+}
+
+.type-button.fighting {
+    box-shadow: 3px 5px var(--fighting-color);
+}
+
+.type-button.poison {
+    box-shadow: 3px 5px var(--poison-color);
+}
+
+.type-button.ground {
+    box-shadow: 3px 5px var(--ground-color);
+}
+
+.type-button.flying {
+    box-shadow: 3px 5px var(--flying-color);
+}
+
+.type-button.psychic {
+    box-shadow: 3px 5px var(--psychic-color);
+}
+
+.type-button.bug {
+    box-shadow: 3px 5px var(--bug-color);
+}
+
+.type-button.rock {
+    box-shadow: 3px 5px var(--rock-color);
+}
+
+.type-button.ghost {
+    box-shadow: 3px 5px var(--ghost-color);
+}
+
+.type-button.dragon {
+    box-shadow: 3px 5px var(--dragon-color);
+}
+
+.type-button.dark {
+    box-shadow: 3px 5px var(--dark-color);
+}
+
+.type-button.steel {
+    box-shadow: 3px 5px var(--steel-color);
+}
+
+.type-button.fairy {
+    box-shadow: 3px 5px var(--fairy-color);
+}
+
+
+.type-button.normal:hover {
+    color: var(--normal-color);
+    background-color:black;
+}
+
+.type-button.fire:hover {
+    color: var(--fire-color);
+    background-color:black;
+}
+
+.type-button.water:hover {
+    color: var(--water-color);
+    background-color:black;
+}
+
+.type-button.electric:hover {
+    color: var(--electric-color);
+    background-color:black;
+}
+
+.type-button.grass:hover {
+    color: var(--grass-color);
+    background-color:black;
+}
+
+.type-button.ice:hover {
+    color: var(--ice-color);
+    background-color:black;
+}
+
+.type-button.fighting:hover {
+    color: var(--fighting-color);
+    background-color:black;
+}
+
+.type-button.poison:hover {
+    color: var(--poison-color);
+    background-color:black;
+}
+
+.type-button.ground:hover {
+    color: var(--ground-color);
+    background-color:black;
+}
+
+.type-button.flying:hover {
+    color: var(--flying-color);
+    background-color:black;
+}
+
+.type-button.psychic:hover {
+    color: var(--psychic-color);
+    background-color:black;
+}
+
+.type-button.bug:hover {
+    color: var(--bug-color);
+    background-color:black;
+}
+
+.type-button.rock:hover {
+    color: var(--rock-color);
+    background-color:black;
+}
+
+.type-button.ghost:hover {
+    color: var(--ghost-color);
+    background-color:white;
+}
+
+.type-button.dragon:hover {
+    color: var(--dragon-color);
+    background-color:white;
+}
+
+.type-button.dark:hover {
+    color: var(--dark-color);
+    background-color:white;
+}
+
+.type-button.steel:hover{
+    color: var(--steel-color);
+    background-color:black;
+}
+
+.type-button.fairy:hover {
+    color: var(--fairy-color);
+    background-color:black;
+}
+
+
+.type-button:hover{
+    cursor:pointer;
+    box-shadow: none;
+}
+
