@@ -8,31 +8,42 @@ interface TypeProps {
 }
 const Types : React.FC<TypeProps> = ({setTypeName}) => {
 
-    const [types, setTypes] = useState<PokeType[]>([]);
+    const [types, setTypes] = useState<Array<{ type: PokeType, isSelected: boolean }>>([])
 
     const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setTypeName(event.currentTarget.value)
+        const typeName = event.currentTarget.value;
+        console.log(typeName)
+
+        // Create a new array with updated isSelected property
+        const updatedTypes = types.map(item => ({
+            type: item.type,
+            isSelected: item.type.name === typeName
+        }));
+
+        setTypeName(typeName);
+        setTypes(updatedTypes);
     }
 
     useEffect(() => {
         const init = async () => {
-            const fetchTypes = await getTypes()
-            if(fetchTypes.status === 200){
-                let temp : PokeType[] = [];
-                fetchTypes.data.results.forEach((type : PokeType) =>  {
-                    temp.push(type)
-                });
-                setTypes(temp)
+            const fetchTypes = await getTypes();
+            if (fetchTypes.status === 200) {
+                const temp: { type: PokeType, isSelected: boolean }[] = fetchTypes.data.results.map((type: PokeType) => ({
+                    type,
+                    isSelected: false
+                }));
+                setTypes(temp);
             }
         }
         init();
-    }, [types]);
-    const listItems = [<button key="all" value="" className={"type-button all"}>ALL</button>];
+    }, []);
+
+    const listItems = [<button onClick={onClickType} key="all" value="all" className={"type-button all"}>ALL</button>];
     listItems.push(
         ...types.map(type => (
-            <button onClick={onClickType} key={type.name} value={`${type.name}`} className={`type-button ${type.name}`}>
-                {type.name.toUpperCase()}
+            <button onClick={onClickType} key={type.type.name} value={`${type.type.name}`} className={`type-button ${type.type.name}`}>
+                {type.type.name.toUpperCase()}
             </button>
         ))
     );

@@ -25,7 +25,7 @@ const App : React.FC = () => {
                 />
             </div>
             <Types setTypeName={setTypeName}/> {/* Affichage des composants Types et PokemonList */}
-            <PokemonList name={name} />
+            <PokemonList typeName={typeName} name={name} />
         </div>
     );
 }

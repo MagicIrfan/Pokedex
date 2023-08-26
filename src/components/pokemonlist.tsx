@@ -5,9 +5,10 @@ import Pokemon from "../models/pokemon";
 
 interface PokemonListProps {
     name: string;
+    typeName:string;
 }
 
-const PokemonList: React.FC<PokemonListProps> = ({ name }) => {
+const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
     useEffect(() => {
@@ -27,8 +28,13 @@ const PokemonList: React.FC<PokemonListProps> = ({ name }) => {
     }, []);
 
     const filteredPokemons = useMemo(() => {
-        return pokemons.filter((pokemon) => pokemon.name.includes(name));
-    }, [name, pokemons]);
+        console.log(typeName)
+        return pokemons.filter((pokemon) =>
+            pokemon.name.includes(name) &&
+            (typeName !== "all"
+                ? pokemon.types.some(typeInfo => typeInfo.type.name === typeName)
+                : true))
+    }, [typeName, name, pokemons]);
 
     const listItems = filteredPokemons.map(pokemon => (
         <PokemonComponent pokemon={pokemon} key={pokemon.id} />
