@@ -1,10 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import Pokemon from "./pokemon";
 import {getTypes} from "../services/typeservice";
 import PokeType from "../models/type";
-const Types : React.FC = () => {
+
+interface TypeProps {
+    setTypeName: Dispatch<SetStateAction<string>>;
+}
+const Types : React.FC<TypeProps> = ({setTypeName}) => {
 
     const [types, setTypes] = useState<PokeType[]>([]);
+
+    const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setTypeName(event.currentTarget.value)
+    }
 
     useEffect(() => {
         const init = async () => {
@@ -19,10 +28,10 @@ const Types : React.FC = () => {
         }
         init();
     }, [types]);
-    const listItems = [<button key="all" className={"type-button all"}>ALL</button>];
+    const listItems = [<button key="all" value="" className={"type-button all"}>ALL</button>];
     listItems.push(
         ...types.map(type => (
-            <button key={type.name} className={`type-button ${type.name}`}>
+            <button onClick={onClickType} key={type.name} value={`${type.name}`} className={`type-button ${type.name}`}>
                 {type.name.toUpperCase()}
             </button>
         ))

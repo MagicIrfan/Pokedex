@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import '../assets/stylesheets/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import PokemonList from "./pokemonlist";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Types from "./types";
 
 const App : React.FC = () => {
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState<string>("");
+    const [typeName, setTypeName] = useState<string>("");
     const onPokemonInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value); // Utilisation de event.target.value pour obtenir la valeur de l'input
     };
@@ -24,7 +24,7 @@ const App : React.FC = () => {
                     placeholder={"Search a pokémon !"}
                 />
             </div>
-            <Types /> {/* Affichage des composants Types et PokemonList */}
+            <Types setTypeName={setTypeName}/> {/* Affichage des composants Types et PokemonList */}
             <PokemonList name={name} />
         </div>
     );

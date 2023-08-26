@@ -23,7 +23,6 @@ const PokemonList: React.FC<PokemonListProps> = ({ name }) => {
                 setPokemons(data);
             }
         };
-
         init();
     }, []);
 
