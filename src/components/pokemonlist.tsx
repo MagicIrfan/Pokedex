@@ -1,34 +1,45 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PokemonComponent from "./pokemon";
-import {getPokemon, getPokemons} from "../services/pokemonservice"
+import { getPokemon, getPokemons } from "../services/pokemonservice";
+import Pokemon from "../models/pokemon";
 
-const PokemonList : React.FC = () => {
+interface PokemonListProps {
+    name: string;
+}
 
-    const [pokemons, setPokemons] = useState([]);
+const PokemonList: React.FC<PokemonListProps> = ({ name }) => {
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
     useEffect(() => {
         const init = async () =>  {
-            const fetchPokemons = await getPokemons()
-            if(fetchPokemons.status === 200){
+            const fetchPokemons = await getPokemons();
+            if (fetchPokemons.status === 200) {
                 const pokeNumber = fetchPokemons.data.count;
                 let data = [];
-                for(let index = 1; index<152; index++){
-                    const fetchPokemon = await getPokemon(index)
-                    data.push(fetchPokemon.data)
+                for (let index = 1; index < 152; index++) {
+                    const fetchPokemon = await getPokemon(index);
+                    data.push(fetchPokemon.data);
                 }
-                // @ts-ignore
-                setPokemons(data)
+                setPokemons(data);
             }
-        }
+        };
+
         init();
     }, []);
 
-    const listItems = pokemons.map(pokemon => <PokemonComponent pokemon={pokemon}></PokemonComponent>);
+    const filteredPokemons = useMemo(() => {
+        return pokemons.filter((pokemon) => pokemon.name.includes(name));
+    }, [name, pokemons]);
+
+    const listItems = filteredPokemons.map(pokemon => (
+        <PokemonComponent pokemon={pokemon} key={pokemon.id} />
+    ));
+
     return (
         <div className="pokemons">
             {listItems}
         </div>
     );
-}
+};
 
 export default PokemonList;
