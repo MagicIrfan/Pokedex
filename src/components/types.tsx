@@ -13,7 +13,6 @@ const Types : React.FC<TypeProps> = ({setTypeName}) => {
     const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const typeName = event.currentTarget.value;
-        console.log(typeName)
 
         // Create a new array with updated isSelected property
         const updatedTypes = types.map(item => ({
