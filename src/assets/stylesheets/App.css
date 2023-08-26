@@ -86,6 +86,7 @@
     border-radius: 20px;
     transition-timing-function: ease;
     transition-duration: 0.7s;
+    color: inherit;
 }
 
 .poke-number{
@@ -215,260 +216,106 @@
     color: black;
 }
 
+/* Define individual styling for each type */
 .type-button.normal {
-    border: 2px solid var(--normal-color);
-    color: var(--normal-color);
-}
-
-.type-button.normal:not(.selected){
-    box-shadow: 3px 5px var(--normal-color);
+    --color: var(--normal-color);
 }
 
 .type-button.fire {
-    border: 2px solid var(--fire-color);
-    color: var(--fire-color);
-    box-shadow: 3px 5px var(--fire-color);
+    --color: var(--fire-color);
 }
 
 .type-button.water {
-    border: 2px solid var(--water-color);
-    color: var(--water-color);
-    box-shadow: 3px 5px var(--water-color);
+    --color: var(--water-color);
 }
 
 .type-button.electric {
-    border: 2px solid var(--electric-color);
-    color: var(--electric-color);
-    box-shadow: 3px 5px var(--electric-color);
+    --color: var(--electric-color);
 }
 
 .type-button.grass {
-    border: 2px solid var(--grass-color);
-    color: var(--grass-color);
-    box-shadow: 3px 5px var(--grass-color);
+    --color: var(--grass-color);
 }
 
 .type-button.ice {
-    border: 2px solid var(--ice-color);
-    color: var(--ice-color);
-    box-shadow: 3px 5px var(--ice-color);
+    --color: var(--ice-color);
 }
 
 .type-button.fighting {
-    border: 2px solid var(--fighting-color);
-    color: var(--fighting-color);
-    box-shadow: 3px 5px var(--fighting-color);
+    --color: var(--fighting-color);
 }
 
 .type-button.poison {
-    border: 2px solid var(--poison-color);
-    color: var(--poison-color);
-    box-shadow: 3px 5px var(--poison-color);
+    --color: var(--poison-color);
 }
 
 .type-button.ground {
-    border: 2px solid var(--ground-color);
-    color: var(--ground-color);
-    box-shadow: 3px 5px var(--ground-color);
+    --color: var(--ground-color);
 }
 
 .type-button.flying {
-    border: 2px solid var(--flying-color);
-    color: var(--flying-color);
-    box-shadow: 3px 5px var(--flying-color);
+    --color: var(--flying-color);
 }
 
 .type-button.psychic {
-    border: 2px solid var(--psychic-color);
-    color: var(--psychic-color);
-    box-shadow: 3px 5px var(--psychic-color);
+    --color: var(--psychic-color);
 }
 
 .type-button.bug {
-    border: 2px solid var(--bug-color);
-    color: var(--bug-color);
-    box-shadow: 3px 5px var(--bug-color);
+    --color: var(--bug-color);
 }
 
 .type-button.rock {
-    border: 2px solid var(--rock-color);
-    color: var(--rock-color);
-    box-shadow: 3px 5px var(--rock-color);
+    --color: var(--rock-color);
 }
 
 .type-button.ghost {
-    border: 2px solid var(--ghost-color);
-    color: var(--ghost-color);
-    box-shadow: 3px 5px var(--ghost-color);
+    --color: var(--ghost-color);
 }
 
 .type-button.dragon {
-    border: 2px solid var(--dragon-color);
-    color: var(--dragon-color);
-    box-shadow: 3px 5px var(--dragon-color);
+    --color: var(--dragon-color);
 }
 
 .type-button.dark {
-    border: 2px solid var(--dark-color);
-    color: var(--dark-color);
-    box-shadow: 3px 5px var(--dark-color);
+    --color: var(--dark-color);
 }
 
 .type-button.steel {
-    border: 2px solid var(--steel-color);
-    color: var(--steel-color);
-    box-shadow: 3px 5px var(--steel-color);
+    --color: var(--steel-color);
 }
 
 .type-button.fairy {
-    border: 2px solid var(--fairy-color);
-    color: var(--fairy-color);
-    box-shadow: 3px 5px var(--fairy-color);
+    --color: var(--fairy-color);
 }
 
 .type-button.unknown {
-    border: 2px solid var(--unknown-color);
-    color: var(--unknown-color);
-    box-shadow: 3px 5px var(--unknown-color);
+    --color: var(--unknown-color);
 }
 
 .type-button.shadow {
-    border: 2px solid var(--shadow-color);
-    color: var(--shadow-color);
-    box-shadow: 3px 5px var(--shadow-color);
+    --color: var(--shadow-color);
 }
 
 .type-button.all {
-    border: 2px solid var(--all-color);
-    color: var(--all-color);
-    box-shadow: 3px 5px var(--all-color);
+    --color: var(--all-color);
 }
 
-
-/* Normal Type */
-.type-button.normal:hover,
-.type-button.normal.selected {
-    background-color: var(--normal-color);
-    color: white;
+/* Apply the defined styles to each type button */
+.type-button {
+    border: 2px solid var(--color);
+    color: var(--color);
+    box-shadow: 3px 5px var(--color);
 }
 
-/* Fire Type */
-.type-button.fire:hover,
-.type-button.fire.selected {
-    background-color: var(--fire-color);
-    color: white;
+/* Additional styling for unselected buttons */
+.type-button.selected {
+    box-shadow: none;
 }
 
-/* Water Type */
-.type-button.water:hover,
-.type-button.water.selected {
-    background-color: var(--water-color);
-    color: white;
-}
-
-/* Electric Type */
-.type-button.electric:hover,
-.type-button.electric.selected {
-    background-color: var(--electric-color);
-    color: white;
-}
-
-/* Grass Type */
-.type-button.grass:hover,
-.type-button.grass.selected {
-    background-color: var(--grass-color);
-    color: white;
-}
-
-/* Ice Type */
-.type-button.ice:hover,
-.type-button.ice.selected {
-    background-color: var(--ice-color);
-    color: white;
-}
-
-/* Fighting Type */
-.type-button.fighting:hover,
-.type-button.fighting.selected {
-    background-color: var(--fighting-color);
-    color: white;
-}
-
-/* Poison Type */
-.type-button.poison:hover,
-.type-button.poison.selected {
-    background-color: var(--poison-color);
-    color: white;
-}
-
-/* Ground Type */
-.type-button.ground:hover,
-.type-button.ground.selected {
-    background-color: var(--ground-color);
-    color: white;
-}
-
-/* Flying Type */
-.type-button.flying:hover,
-.type-button.flying.selected {
-    background-color: var(--flying-color);
-    color: white;
-}
-
-/* Psychic Type */
-.type-button.psychic:hover,
-.type-button.psychic.selected {
-    background-color: var(--psychic-color);
-    color: white;
-}
-
-.type-button.bug:hover,.type-button.bug.selected {
-    background-color: var(--bug-color);
-    color: white;
-}
-
-.type-button.rock:hover,.type-button.rock.selected {
-    background-color: var(--rock-color);
-    color: white;
-}
-
-.type-button.ghost:hover,.type-button.ghost.selected {
-    background-color: var(--ghost-color);
-    color: white;
-}
-
-.type-button.dragon:hover,.type-button.dragon.selected {
-    background-color: var(--dragon-color);
-    color: white;
-}
-
-.type-button.dark:hover,.type-button.dark.selected {
-    background-color: var(--dark-color);
-    color: white;
-}
-
-.type-button.steel:hover,.type-button.steel.selected {
-    background-color: var(--steel-color);
-    color: white;
-}
-
-.type-button.fairy:hover,.type-button.fairy.selected {
-    background-color: var(--fairy-color);
-    color: white;
-}
-
-.type-button.unknown:hover,.type-button.unknown.selected {
-    background-color: var(--unknown-color);
-    color: white;
-}
-
-.type-button.shadow:hover,.type-button.shadow.selected {
-    background-color: var(--shadow-color);
-    color: white;
-}
-
-.type-button.all:hover,.type-button.all.selected {
-    background-color: var(--all-color);
+.type-button:hover,
+.type-button.selected {
+    background-color: var(--color);
     color: white;
 }
 
