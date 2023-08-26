@@ -108,6 +108,11 @@
     --color: var(--all-color);
 }
 
+@keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
 .search-poke{
     background: none;
     border:none;
@@ -173,6 +178,8 @@
     border-radius: 20px;
     transition-timing-function: ease;
     transition-duration: 0.7s;
+    scroll-snap-align: start;
+    animation: fadein 1s;
 }
 
 .poke-number{

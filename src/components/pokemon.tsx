@@ -7,9 +7,6 @@ interface PokemonProps {
 }
 
 const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
-    useEffect(() => {
-        // Any additional logic you might want to add
-    }, []);
 
     return (
         <div className={"pokemon " + (pokemon.types[0].type.name)}>
