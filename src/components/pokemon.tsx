@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Pokemon from "../models/pokemon";
-import image from "../assets/images/image.png"
+import pokeball from "../assets/images/pokeball.png"
 import {capitalize, pokenumber} from "../utils/string";
 interface PokemonProps {
     pokemon:Pokemon;
@@ -24,7 +24,8 @@ const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
                     ))}
                 </div>
                 <div className="poke-image">
-                    <img className={"image-poke"} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`} width={150} height={150} alt="pokemon" />
+                    <img className={"image-poke"} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`} width={160} height={160} alt="pokemon" />
+                    <img className={"pokeball-img"} src={pokeball} width={200} height={200} alt="pokeball" />
                 </div>
             </div>
         </div>

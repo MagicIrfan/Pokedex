@@ -20,6 +20,7 @@
     --fairy-color: #D685AD;
     --unknown-color:#4f8071;
     --shadow-color:black;
+    --all-color:black;
 }
 
 .search-poke{
@@ -51,6 +52,7 @@
 }
 
 .pokemon{
+    position: relative;
     width:18em;
     border-radius: 20px;
     border: 1px solid lightgray;
@@ -90,7 +92,7 @@
     text-align: end;
     margin-right: 2px;
     font-size: 18px;
-    color: #1f29374d;
+    color: #787878d9;
     transition-timing-function: ease;
     transition-duration: 0.7s;
 }
@@ -118,9 +120,9 @@
 }
 
 .pokeball-img{
-    position: relative;
-    bottom: 110px;
-    left: 50px;
+    position: absolute;
+    top: 120px;
+    right: -30px;
 }
 
 .pokemon.normal {
@@ -333,6 +335,12 @@
     box-shadow: 3px 5px var(--shadow-color);
 }
 
+.type-button.all {
+    border: 2px solid var(--all-color);
+    color: var(--all-color);
+    box-shadow: 3px 5px var(--all-color);
+}
+
 
 .type-button.normal:hover {
     background-color: var(--normal-color);
@@ -434,12 +442,25 @@
     color: white;
 }
 
+.type-button.all:hover {
+    background-color: var(--all-color);
+    color: white;
+}
+
 .type-button:hover{
     cursor:pointer;
     box-shadow: none;
 }
 
 .image-poke{
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+    position: relative;
+    top:10px;
+    z-index: 2;
+}
+
+.pokeball-img{
     transition-timing-function: ease;
     transition-duration: 0.5s;
 }
@@ -450,5 +471,9 @@
 
 .pokemon:hover > .poke-number{
     color:white;
+}
+
+.pokemon:hover .pokeball-img{
+    transform: rotate(45deg);
 }
 

@@ -19,10 +19,17 @@ const Types : React.FC = () => {
         }
         init();
     }, [types]);
-    const listItems = types.map(type => <button className={"type-button " + (type.name)}>{type.name.toUpperCase()}</button>);
+    const listItems = [<button key="all" className={"type-button all"}>ALL</button>];
+    listItems.push(
+        ...types.map(type => (
+            <button key={type.name} className={`type-button ${type.name}`}>
+                {type.name.toUpperCase()}
+            </button>
+        ))
+    );
     return (
         <div className={"types"}>
-            <h1>Types</h1>
+            <h1>Choose a type</h1>
             <div className={"type-list"}>
                 {listItems}
             </div>
