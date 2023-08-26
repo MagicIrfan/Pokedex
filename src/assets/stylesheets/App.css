@@ -23,6 +23,91 @@
     --all-color:black;
 }
 
+/* Define individual styling for each type */
+.normal {
+    --color: var(--normal-color);
+}
+
+.fire {
+    --color: var(--fire-color);
+}
+
+.water {
+    --color: var(--water-color);
+}
+
+.electric {
+    --color: var(--electric-color);
+}
+
+.grass {
+    --color: var(--grass-color);
+}
+
+.ice {
+    --color: var(--ice-color);
+}
+
+.fighting {
+    --color: var(--fighting-color);
+}
+
+.poison {
+    --color: var(--poison-color);
+}
+
+.ground {
+    --color: var(--ground-color);
+}
+
+.flying {
+    --color: var(--flying-color);
+}
+
+.psychic {
+    --color: var(--psychic-color);
+}
+
+.bug {
+    --color: var(--bug-color);
+}
+
+.rock {
+    --color: var(--rock-color);
+}
+
+.ghost {
+    --color: var(--ghost-color);
+}
+
+.dragon {
+    --color: var(--dragon-color);
+}
+
+.dark {
+    --color: var(--dark-color);
+}
+
+.steel {
+    --color: var(--steel-color);
+}
+
+.fairy {
+    --color: var(--fairy-color);
+}
+
+.unknown {
+    --color: var(--unknown-color);
+}
+
+.shadow {
+    --color: var(--shadow-color);
+}
+
+.all {
+    --color: var(--all-color);
+}
+
 .search-poke{
     background: none;
     border:none;
@@ -61,6 +146,8 @@
     transition-timing-function: ease;
     transition-duration: 0.7s;
     cursor:pointer;
+    background-color: var(--color);
+    color:black;
 }
 
 
@@ -86,7 +173,6 @@
     border-radius: 20px;
     transition-timing-function: ease;
     transition-duration: 0.7s;
-    color: inherit;
 }
 
 .poke-number{
@@ -124,181 +210,6 @@
     position: absolute;
     top: 120px;
     right: -30px;
-}
-
-.pokemon.normal {
-    background-color: var(--normal-color);
-    color: black;
-}
-
-.pokemon.fire {
-    background-color: var(--fire-color);
-    color: black;
-}
-
-.pokemon.water {
-    background-color: var(--water-color);
-    color: black;
-}
-
-.pokemon.electric {
-    background-color: var(--electric-color);
-    color: black;
-}
-
-.pokemon.grass {
-    background-color: var(--grass-color);
-    color: black;
-}
-
-.pokemon.ice {
-    background-color: var(--ice-color);
-    color: black;
-}
-
-.pokemon.fighting {
-    background-color: var(--fighting-color);
-    color: black;
-}
-
-.pokemon.poison {
-    background-color: var(--poison-color);
-    color: black;
-}
-
-.pokemon.ground {
-    background-color: var(--ground-color);
-    color: black;
-}
-
-.pokemon.flying {
-    background-color: var(--flying-color);
-    color: black;
-}
-
-.pokemon.psychic {
-    background-color: var(--psychic-color);
-    color: black;
-}
-
-.pokemon.bug {
-    background-color: var(--bug-color);
-    color: black;
-}
-
-.pokemon.rock {
-    background-color: var(--rock-color);
-    color: black;
-}
-
-.pokemon.ghost {
-    background-color: var(--ghost-color);
-    color: white;
-}
-
-.pokemon.dragon {
-    background-color: var(--dragon-color);
-    color: white;
-}
-
-.pokemon.dark {
-    background-color: var(--dark-color);
-    color: white;
-}
-
-.pokemon.steel {
-    background-color: var(--steel-color);
-    color: black;
-}
-
-.pokemon.fairy {
-    background-color: var(--fairy-color);
-    color: black;
-}
-
-/* Define individual styling for each type */
-.type-button.normal {
-    --color: var(--normal-color);
-}
-
-.type-button.fire {
-    --color: var(--fire-color);
-}
-
-.type-button.water {
-    --color: var(--water-color);
-}
-
-.type-button.electric {
-    --color: var(--electric-color);
-}
-
-.type-button.grass {
-    --color: var(--grass-color);
-}
-
-.type-button.ice {
-    --color: var(--ice-color);
-}
-
-.type-button.fighting {
-    --color: var(--fighting-color);
-}
-
-.type-button.poison {
-    --color: var(--poison-color);
-}
-
-.type-button.ground {
-    --color: var(--ground-color);
-}
-
-.type-button.flying {
-    --color: var(--flying-color);
-}
-
-.type-button.psychic {
-    --color: var(--psychic-color);
-}
-
-.type-button.bug {
-    --color: var(--bug-color);
-}
-
-.type-button.rock {
-    --color: var(--rock-color);
-}
-
-.type-button.ghost {
-    --color: var(--ghost-color);
-}
-
-.type-button.dragon {
-    --color: var(--dragon-color);
-}
-
-.type-button.dark {
-    --color: var(--dark-color);
-}
-
-.type-button.steel {
-    --color: var(--steel-color);
-}
-
-.type-button.fairy {
-    --color: var(--fairy-color);
-}
-
-.type-button.unknown {
-    --color: var(--unknown-color);
-}
-
-.type-button.shadow {
-    --color: var(--shadow-color);
-}
-
-.type-button.all {
-    --color: var(--all-color);
 }
 
 /* Apply the defined styles to each type button */
