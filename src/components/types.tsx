@@ -28,24 +28,30 @@ const Types : React.FC<TypeProps> = ({setTypeName}) => {
         const init = async () => {
             const fetchTypes = await getTypes();
             if (fetchTypes.status === 200) {
-                const temp: { type: PokeType, isSelected: boolean }[] = fetchTypes.data.results.map((type: PokeType) => ({
+                const all : PokeType = {
+                    name:"all"
+                };
+                const temp : { type: PokeType, isSelected: boolean }[] = [{type:all, isSelected:true}];
+                temp.push(...fetchTypes.data.results.map((type: PokeType) => ({
                     type,
                     isSelected: false
-                }));
+                })));
                 setTypes(temp);
             }
         }
         init();
     }, []);
 
-    const listItems = [<button onClick={onClickType} key="all" value="all" className={"type-button all"}>ALL</button>];
-    listItems.push(
-        ...types.map(type => (
-            <button onClick={onClickType} key={type.type.name} value={`${type.type.name}`} className={`type-button ${type.type.name}`}>
-                {type.type.name.toUpperCase()}
-            </button>
-        ))
-    );
+    const listItems = types.map(type => (
+        <button
+            onClick={onClickType}
+            key={type.type.name}
+            value={type.type.name}
+            className={`type-button ${type.type.name} ${type.isSelected ? 'selected' : ''}`}
+        >
+            {type.type.name.toUpperCase()}
+        </button>
+    ));
     return (
         <div className={"types"}>
             <h1>Choose a type</h1>

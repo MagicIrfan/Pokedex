@@ -218,6 +218,9 @@
 .type-button.normal {
     border: 2px solid var(--normal-color);
     color: var(--normal-color);
+}
+
+.type-button.normal:not(.selected){
     box-shadow: 3px 5px var(--normal-color);
 }
 
@@ -342,107 +345,129 @@
 }
 
 
-.type-button.normal:hover {
+/* Normal Type */
+.type-button.normal:hover,
+.type-button.normal.selected {
     background-color: var(--normal-color);
     color: white;
 }
 
-.type-button.fire:hover {
+/* Fire Type */
+.type-button.fire:hover,
+.type-button.fire.selected {
     background-color: var(--fire-color);
     color: white;
 }
 
-.type-button.water:hover {
+/* Water Type */
+.type-button.water:hover,
+.type-button.water.selected {
     background-color: var(--water-color);
     color: white;
 }
 
-.type-button.electric:hover {
+/* Electric Type */
+.type-button.electric:hover,
+.type-button.electric.selected {
     background-color: var(--electric-color);
     color: white;
 }
 
-.type-button.grass:hover {
+/* Grass Type */
+.type-button.grass:hover,
+.type-button.grass.selected {
     background-color: var(--grass-color);
     color: white;
 }
 
-.type-button.ice:hover {
+/* Ice Type */
+.type-button.ice:hover,
+.type-button.ice.selected {
     background-color: var(--ice-color);
     color: white;
 }
 
-.type-button.fighting:hover {
+/* Fighting Type */
+.type-button.fighting:hover,
+.type-button.fighting.selected {
     background-color: var(--fighting-color);
     color: white;
 }
 
-.type-button.poison:hover {
+/* Poison Type */
+.type-button.poison:hover,
+.type-button.poison.selected {
     background-color: var(--poison-color);
     color: white;
 }
 
-.type-button.ground:hover {
+/* Ground Type */
+.type-button.ground:hover,
+.type-button.ground.selected {
     background-color: var(--ground-color);
     color: white;
 }
 
-.type-button.flying:hover {
+/* Flying Type */
+.type-button.flying:hover,
+.type-button.flying.selected {
     background-color: var(--flying-color);
     color: white;
 }
 
-.type-button.psychic:hover {
+/* Psychic Type */
+.type-button.psychic:hover,
+.type-button.psychic.selected {
     background-color: var(--psychic-color);
     color: white;
 }
 
-.type-button.bug:hover {
+.type-button.bug:hover,.type-button.bug.selected {
     background-color: var(--bug-color);
     color: white;
 }
 
-.type-button.rock:hover {
+.type-button.rock:hover,.type-button.rock.selected {
     background-color: var(--rock-color);
     color: white;
 }
 
-.type-button.ghost:hover {
+.type-button.ghost:hover,.type-button.ghost.selected {
     background-color: var(--ghost-color);
     color: white;
 }
 
-.type-button.dragon:hover {
+.type-button.dragon:hover,.type-button.dragon.selected {
     background-color: var(--dragon-color);
     color: white;
 }
 
-.type-button.dark:hover {
+.type-button.dark:hover,.type-button.dark.selected {
     background-color: var(--dark-color);
     color: white;
 }
 
-.type-button.steel:hover {
+.type-button.steel:hover,.type-button.steel.selected {
     background-color: var(--steel-color);
     color: white;
 }
 
-.type-button.fairy:hover {
+.type-button.fairy:hover,.type-button.fairy.selected {
     background-color: var(--fairy-color);
     color: white;
 }
 
-.type-button.unknown:hover {
+.type-button.unknown:hover,.type-button.unknown.selected {
     background-color: var(--unknown-color);
     color: white;
 }
 
-.type-button.shadow:hover {
+.type-button.shadow:hover,.type-button.shadow.selected {
     background-color: var(--shadow-color);
     color: white;
 }
 
-.type-button.all:hover {
+.type-button.all:hover,.type-button.all.selected {
     background-color: var(--all-color);
     color: white;
 }
