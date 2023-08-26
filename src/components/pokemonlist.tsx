@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Pokemon from "./pokemon";
+import PokemonComponent from "./pokemon";
 import {getPokemon, getPokemons} from "../services/pokemonservice"
 
 const PokemonList : React.FC = () => {
@@ -12,29 +12,21 @@ const PokemonList : React.FC = () => {
             if(fetchPokemons.status === 200){
                 const pokeNumber = fetchPokemons.data.count;
                 let data = [];
-                for(let index = 1; index<pokeNumber; index++){
+                for(let index = 1; index<152; index++){
                     const fetchPokemon = await getPokemon(index)
-                    console.log(fetchPokemon.data)
+                    data.push(fetchPokemon.data)
                 }
+                // @ts-ignore
+                setPokemons(data)
             }
         }
-        //init();
+        init();
     }, []);
 
-    const numberOfTimes = 10;
-
-    const renderMyComponentMultipleTimes = () => {
-        const components = [];
-
-        for (let i = 0; i < numberOfTimes; i++) {
-            components.push(<Pokemon key={i} />);
-        }
-
-        return components;
-    };
+    const listItems = pokemons.map(pokemon => <PokemonComponent pokemon={pokemon}></PokemonComponent>);
     return (
         <div className="pokemons">
-            {renderMyComponentMultipleTimes()}
+            {listItems}
         </div>
     );
 }
