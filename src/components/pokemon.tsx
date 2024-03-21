@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Pokemon from "../models/pokemon";
 import pokeball from "../assets/images/pokeball.png"
 import {capitalize, pokenumber} from "../utils/string";
