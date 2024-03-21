@@ -28,11 +28,10 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     }, []);
 
     const filteredPokemons = useMemo(() => {
-        console.log(typeName)
         return pokemons.filter((pokemon) =>
             pokemon.name.includes(name) &&
             (typeName !== "all"
-                ? pokemon.types.some(typeInfo => typeInfo.type.name === typeName)
+                ? pokemon.types.some(typeInfo => typeInfo.name === typeName)
                 : true))
     }, [typeName, name, pokemons]);
 
