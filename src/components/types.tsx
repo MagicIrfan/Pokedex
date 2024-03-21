@@ -1,7 +1,8 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import Pokemon from "./pokemon";
 import {getTypes} from "../services/typeservice";
 import PokeType from "../models/pokeType";
+import {getPokemon} from "../services/pokemonservice";
+import Pokemon from "../models/pokemon";
 
 interface TypeProps {
     setTypeName: Dispatch<SetStateAction<string>>;
@@ -25,19 +26,17 @@ const Types : React.FC<TypeProps> = ({setTypeName}) => {
     }
 
     useEffect(() => {
-        const init = async () => {
-            const fetchTypes = await getTypes();
-            if (fetchTypes.status === 200) {
-                const all : PokeType = new PokeType("all");
-                const temp : { type: PokeType, isSelected: boolean }[] = [{type:all, isSelected:true}];
-                temp.push(...fetchTypes.data.results.map((type: PokeType) => ({
-                    type,
-                    isSelected: false
-                })));
-                setTypes(temp);
-            }
+        const fetchPokemonTypes = async () => {
+            const fetchTypes : PokeType[] = await getTypes();
+            const all : PokeType = new PokeType("all");
+            const temp : { type: PokeType, isSelected: boolean }[] = [{type:all, isSelected:true}];
+            temp.push(...fetchTypes.map((type: PokeType) => ({
+                type,
+                isSelected: false
+            })));
+            setTypes(temp);
         }
-        init();
+        fetchPokemonTypes();
     }, []);
 
     const listItems = types.map(type => (

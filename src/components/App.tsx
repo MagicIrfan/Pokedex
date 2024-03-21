@@ -10,7 +10,7 @@ const App : React.FC = () => {
     const [name, setName] = useState<string>("");
     const [typeName, setTypeName] = useState<string>("all");
     const onPokemonInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setName(event.target.value); // Utilisation de event.target.value pour obtenir la valeur de l'input
+        setName(event.target.value);
     };
     return (
         <div className="App">

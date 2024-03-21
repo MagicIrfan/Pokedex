@@ -8,11 +8,8 @@ export const getPokemon = async (id: number): Promise<Pokemon | null> => {
         if (response.status === 200 && response.data) {
             let data = response.data;
             const {id, name, types} = data;
-            const pokeTypes : PokeType[] = []
-            types.forEach((apiType: { type: { name: string; }; }): void => {
-                pokeTypes.push(new PokeType(apiType.type.name))
-            });
-            return new Pokemon(id,name,pokeTypes);
+            const pokeTypes: PokeType[] = types.map((apiType: { type: { name: string; }; }) => new PokeType(apiType.type.name));
+            return new Pokemon(id, name, pokeTypes);
         }
     } catch (error) {
         console.error('Failed to fetch Pokemon:', error);
