@@ -12,11 +12,12 @@ const App : React.FC = () => {
     const onPokemonInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
     };
+
     return (
         <div className="App">
             <h1>Pokémons</h1>
             <div className={"search"}>
-                <FontAwesomeIcon className={"search-icon"} icon={faSearch} /> {/* Utilisation de faSearch au lieu de icon({name: 'magnifying-glass', style:'solid'}) */}
+                <FontAwesomeIcon className={"search-icon"} icon={faSearch} />
                 <input
                     onInput={onPokemonInput}
                     className={"search-poke"}
@@ -24,7 +25,7 @@ const App : React.FC = () => {
                     placeholder={"Search a pokémon !"}
                 />
             </div>
-            <Types setTypeName={setTypeName}/> {/* Affichage des composants Types et PokemonList */}
+            <Types setTypeName={setTypeName}/>
             <PokemonList typeName={typeName} name={name} />
         </div>
     );
