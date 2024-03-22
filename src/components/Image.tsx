@@ -6,6 +6,7 @@ interface ImageProps {
     width?: number;
     height?: number;
     loading?: 'eager' | 'lazy';
+    className?: string;
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -14,6 +15,7 @@ export const Image: React.FC<ImageProps> = ({
                                                 width,
                                                 height,
                                                 loading = 'lazy', // Default to lazy-loading
+                                                className = ""
                                             }) => {
     return (
         <img
@@ -22,6 +24,7 @@ export const Image: React.FC<ImageProps> = ({
             width={width}
             height={height}
             loading={loading}
+            className={className}
         />
     );
 };

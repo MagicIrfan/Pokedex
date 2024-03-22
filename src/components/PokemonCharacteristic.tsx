@@ -13,8 +13,8 @@ export const PokemonCharacteristic : React.FC<PokemonCharacteristicProps> = ({na
     return (
         <div className={"poke-characteristic"}>
             <p className={"poke-characteristic-name"}>{name}</p>
-            {abilities.map((ability, index) =>
-                <p key={index} className={className}>{icons ? <FontAwesomeIcon icon={icons[index]}/> : <></>} {ability}</p>
+            {abilities.map((ability : string, index : number) =>
+                <p key={index} className={className}>{icons && icons[index]? <FontAwesomeIcon icon={icons[index]}/> : <></>} {ability}</p>
             )}
         </div>
     )

@@ -5,6 +5,7 @@ import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {pokenumber} from "../utils/string";
 import {Tabs} from "./tabs/Tabs";
+import {Image} from "./Image";
 
 const PokemonPage : React.FC = () => {
     const {id} = useParams();
@@ -13,6 +14,10 @@ const PokemonPage : React.FC = () => {
 
     const playPokemonCry = async () : Promise<void> => {
         await audio.play();
+    }
+
+    function changePokemon(number: number) : void {
+        navigate(`/${number}`);
     }
 
     return (
@@ -26,7 +31,7 @@ const PokemonPage : React.FC = () => {
                             <p className={"type grass"}>
                                 Grass
                             </p>
-                            <p className={"type grass"}>
+                            <p className={"type poison"}>
                                 Poison
                             </p>
                         </div>
@@ -41,15 +46,23 @@ const PokemonPage : React.FC = () => {
 
                 <div className={"pokemon-header"}>
                     <div className={"pokemon-main-image"}>
+                        {(Number(id) - 1) >= 1 && <div className={"pokemon-previous-image"} onClick={() => changePokemon(Number(id) - 1)}>
+                            <Image className={"image-poke-hidden"}
+                                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Number(id) - 1}.png`}
+                                   width={150} height={150}
+                                   alt={""}/>
+                        </div>}
                         <div className={"pokemon-main-image-circle"}>
-                            <img
+                            <Image
                                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
                                 width={225} height={225} alt="pokemon"/>
-                            <img className={"image-poke-hidden"}
-                                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Number(id)+1}.png`}
-                                 width={150} height={150}
-                                 alt={""}/>
                         </div>
+                        {(Number(id) + 1) <= 151 && <div className={"pokemon-next-image"} onClick={() => changePokemon(Number(id) + 1)}>
+                            <Image className={"image-poke-hidden"}
+                                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Number(id) + 1}.png`}
+                                   width={150} height={150}
+                                   alt={""}/>
+                        </div>}
                     </div>
                 </div>
                 <div className={"pokemon-details"}>

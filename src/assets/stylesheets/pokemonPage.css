@@ -113,8 +113,9 @@
 }
 
 .pokemon-main-image{
-    display: flex;
-    justify-content: center;
+    display: flex; /* Utilise Flexbox pour aligner les enfants horizontalement */
+    align-items: center; /* Centre les éléments verticalement dans le conteneur */
+    justify-content: center; /* Centre les éléments horizontalement dans le conteneur */
     position: relative;
     top:35px;
 }
@@ -128,6 +129,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.pokemon-previous-image, .pokemon-next-image {
+    position: absolute;
+}
+
+.pokemon-previous-image {
+    left: 100px; /* Aligner à gauche */
+}
+
+.pokemon-next-image {
+    right: 100px; /* Aligner à droite */
 }
 
 .volume{
@@ -150,8 +163,16 @@
 }
 
 .image-poke-hidden{
-    position: absolute;
-    right: 350px;
+    /*position: absolute;
+    right: 350px;*/
+    filter:brightness(25%);
+}
+
+.image-poke-hidden:hover{
+    /*position: absolute;
+    right: 350px;*/
+    transition: filter 0.5s ease-in-out;
+    cursor: pointer;
     filter:brightness(0%);
 }
 
