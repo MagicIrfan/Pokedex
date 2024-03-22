@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {getTypes} from "../services/typeservice";
-import PokeType from "../models/pokeType";
+import PokemonType from "../models/pokemonType";
 import {getPokemon} from "../services/pokemonservice";
 import Pokemon from "../models/pokemon";
 
@@ -9,7 +9,7 @@ interface TypeProps {
 }
 const Types : React.FC<TypeProps> = ({setTypeName}) => {
 
-    const [types, setTypes] = useState<Array<{ type: PokeType, isSelected: boolean }>>([])
+    const [types, setTypes] = useState<Array<{ type: PokemonType, isSelected: boolean }>>([])
 
     const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -27,10 +27,10 @@ const Types : React.FC<TypeProps> = ({setTypeName}) => {
 
     useEffect(() => {
         const fetchPokemonTypes = async () => {
-            const fetchTypes : PokeType[] = await getTypes();
-            const all : PokeType = new PokeType("all");
-            const temp : { type: PokeType, isSelected: boolean }[] = [{type:all, isSelected:true}];
-            temp.push(...fetchTypes.map((type: PokeType) => ({
+            const fetchTypes : PokemonType[] = await getTypes();
+            const all : PokemonType = new PokemonType("all");
+            const temp : { type: PokemonType, isSelected: boolean }[] = [{type:all, isSelected:true}];
+            temp.push(...fetchTypes.map((type: PokemonType) => ({
                 type,
                 isSelected: false
             })));

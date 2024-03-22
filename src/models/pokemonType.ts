@@ -1,4 +1,4 @@
-export default class PokeType{
+export default class PokemonType {
     private readonly _name:string;
 
     constructor(name:string) {

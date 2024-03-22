@@ -1,0 +1,157 @@
+@keyframes rotateScale {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1.25) rotate(-30deg);
+    }
+}
+.pokemon-wrapper{
+    background-color: var(--color);
+    padding-bottom: 8em;
+    margin: 0;
+    z-index: 0;
+}
+
+.pokemon-details{
+    border-radius: 30px;
+    background-color: #ffffff;
+    padding: 1em 4em;
+    z-index: 2;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.pokemon-bar{
+    display: flex; /* Utilise Flexbox */
+    justify-content: space-between; /* Répartit l'espace uniformément entre les éléments */
+    width: 50%; /* S'étend sur toute la largeur */
+    margin: 20px auto;
+}
+
+.pokemon-bar button{
+    text-decoration: none;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    color: darkgray;
+}
+
+.pokemon-bar button:hover{
+    color: black;
+    transition: color 0.5s ease;
+}
+
+.tab-icon{
+    font-size: 15px;
+}
+
+.bar-title{
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre les éléments verticalement */
+    gap: 8px; /* Ajoute un peu d'espace entre les éléments */
+}
+
+.poke-measurements{
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:30px;
+}
+
+.poke-measurements div{
+    text-align: center;
+}
+
+.poke-weight{
+    margin-right: 8em;
+}
+
+.poke-height{
+    margin-left: 8em;
+}
+
+.poke-measurements-title{
+    color: grey;
+}
+
+.poke-description{
+    font-weight: lighter;
+}
+
+.poke-characteristic{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:8px;
+    height:35px;
+}
+
+.poke-characteristic-name{
+    color: grey;
+    margin-right: 15px;
+    width: 8em;
+}
+
+.poke-ability{
+    background-color: lightgrey;
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
+.pokemon-container{
+    margin: 0 auto;
+    padding-top:8em;
+    max-width: 75%;
+    z-index: 2;
+    width: 75%;
+}
+
+.pokemon-main-image{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top:35px;
+}
+
+.pokemon-main-image-circle{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.volume{
+    cursor: pointer;
+}
+
+.volume:hover{
+    animation: rotateScale 0.6s;
+    animation-fill-mode: forwards;
+}
+
+.return-button{
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-poke-hidden{
+    position: absolute;
+    right: 350px;
+    filter:brightness(0%);
+}

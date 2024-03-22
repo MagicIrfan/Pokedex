@@ -1,18 +1,24 @@
 import React from 'react';
 import pokeball from "../assets/images/pokeball.png"
 import {capitalize, pokenumber} from "../utils/string";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 import {PokemonProps} from "../models/pokemonProps";
-import PokeType from "../models/pokeType";
+import PokemonType from "../models/pokemonType";
 
 const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
     const { types, id, name } = pokemon;
+    const navigate : NavigateFunction = useNavigate();
+    const onClickPokemon = (id : number) : void => {
+        navigate(`/${id}`);
+    }
+
     return (
-        <div className={"pokemon " + (types[0].name)}>
+        <div className={"pokemon " + (types[0].name)} onClick={() => onClickPokemon(id)}>
             <p className="poke-number">{pokenumber(id)}</p>
             <h2>{capitalize(name)}</h2>
             <div className="poke-body">
                 <div className={"poke-types"}>
-                    {types.map((type : PokeType, index : number) => {
+                    {types.map((type : PokemonType, index : number) => {
                         return (
                             <p key={index} className={"type " + type.name}>
                                 {capitalize(type.name)}
