@@ -155,3 +155,7 @@
     right: 350px;
     filter:brightness(0%);
 }
+
+.tab-active{
+    color: black;
+}
