@@ -1,5 +1,8 @@
 import React from "react";
 import {AboutTab} from "./AboutTab";
+import {StatTab} from "./StatTab";
+import {EvolutionTab} from "./EvolutionTab";
+import {PokemonMovesTab} from "./PokemonMovesTab";
 
 interface ActiveTabProps{
     activeTab:string
@@ -13,18 +16,9 @@ export const ActiveTab : React.FC<ActiveTabProps> = ({activeTab}) => {
     return (
         <>
             {tabIsActive("about") && <AboutTab/>}
-            {
-                tabIsActive("stats") && <div>
-            </div>
-            }
-            {
-                tabIsActive("evolution") && <div>
-                </div>
-            }
-            {
-                tabIsActive("moves") && <div>
-                </div>
-            }
+            {tabIsActive("stats") && <StatTab/>}
+            {tabIsActive("evolution") && <EvolutionTab/>}
+            {tabIsActive("moves") && <PokemonMovesTab/>}
             {
                 tabIsActive("location") && <div>
                 </div>

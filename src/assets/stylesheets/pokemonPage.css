@@ -108,9 +108,9 @@
 .pokemon-container{
     margin: 0 auto;
     padding-top:8em;
-    max-width: 75%;
+    max-width: 60%;
     z-index: 2;
-    width: 75%;
+    width: 60%;
 }
 
 .pokemon-main-image{
@@ -158,4 +158,88 @@
 
 .tab-active{
     color: black;
+}
+
+.poke-stat{
+    display: flex;
+    flex-direction: row;
+}
+
+.stat-name{
+    color: grey;
+    min-width: 12em;
+}
+
+.stat{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.stat-bar{
+    width: 100%;
+    background-color: lightgrey;
+    margin-left: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.stat-bar, .stat-bar-filled{
+    height: 0.3em;
+    border-radius: 15px;
+}
+
+.stat-bar-filled{
+    width: 50%;
+    background-color: #c22e28;
+}
+
+.evolution-specie{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.evolution-method{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pokemon-move{
+    border-radius: 10px;
+    border: 2px solid var(--color);
+    padding: 1.5em 4em;
+}
+
+.pokemon-move-name{
+    background-color: var(--color);
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.pokemon-move-characteristics{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap:30px;
+    width: 70%;
+}
+
+.pokemon-move-characteristic{
+    background-color: lightgrey;
+    padding: 0 8px;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.pokemon-move-icon svg{
+    fill: var(--color);
+}
+
+.pokemon-move-bottom{
+    display: flex;
+    justify-content: space-between;
 }

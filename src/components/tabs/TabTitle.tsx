@@ -14,9 +14,9 @@ export const TabTitle : React.FC<TabTitleProps> = ({icon,title,className, onClic
 
     return (
         <button onClick={onClick}>
-                            <span className={`bar-title ${className}`}>
-                                <FontAwesomeIcon className={"tab-icon"} icon={icon}/> <p>{title}</p>
-                            </span>
+            <span className={`bar-title ${className}`}>
+                <FontAwesomeIcon className={"tab-icon"} icon={icon}/> <p>{title}</p>
+            </span>
         </button>
     );
 }
