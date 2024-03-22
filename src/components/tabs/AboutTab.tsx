@@ -1,6 +1,7 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMars, faRuler, faVenus, faWeightHanging} from "@fortawesome/free-solid-svg-icons";
+import {PokemonCharacteristic} from "../PokemonCharacteristic";
 
 export const AboutTab : React.FC = () => {
     return (
@@ -22,33 +23,12 @@ export const AboutTab : React.FC = () => {
                     <p>0.6 m</p>
                 </div>
             </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Abilities</p>
-                <p className={"poke-ability"}>Overgrow</p>
-                <p className={"poke-ability"}>Overgrow</p>
-            </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Growth rate</p>
-                <p>Slow</p>
-            </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Capture rate</p>
-                <p>35</p>
-            </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Base happiness</p>
-                <p>50%</p>
-            </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Egg groups</p>
-                <p className={"poke-ability"}>Monster</p>
-                <p className={"poke-ability"}>Plant</p>
-            </div>
-            <div className={"poke-characteristic"}>
-                <p className={"poke-characteristic-name"}>Gender rate</p>
-                <p><FontAwesomeIcon icon={faMars}/> 87,5%</p>
-                <p><FontAwesomeIcon icon={faVenus}/> 12,5%</p>
-            </div>
+            <PokemonCharacteristic name={"Abilities"} abilities={["Overgrow","Chlorophyll"]} className={"poke-ability"}/>
+            <PokemonCharacteristic name={"Growth rate"} abilities={["Slow"]}/>
+            <PokemonCharacteristic name={"Capture rate"} abilities={["35"]}/>
+            <PokemonCharacteristic name={"Base happiness"} abilities={["50%"]}/>
+            <PokemonCharacteristic name={"Egg groups"} abilities={["Monster", "Plant"]}/>
+            <PokemonCharacteristic name={"Gender rate"} abilities={["87,5%", "12,5%"]} icons={[faMars,faVenus]}/>
         </div>
     );
 }

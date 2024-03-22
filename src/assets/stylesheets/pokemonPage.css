@@ -25,8 +25,7 @@
 .pokemon-bar{
     display: flex; /* Utilise Flexbox */
     justify-content: space-between; /* Répartit l'espace uniformément entre les éléments */
-    width: 50%; /* S'étend sur toute la largeur */
-    margin: 20px auto;
+    margin: 20px 10em;
 }
 
 .pokemon-bar button{
@@ -242,4 +241,10 @@
 .pokemon-move-bottom{
     display: flex;
     justify-content: space-between;
+}
+
+.pokemon-moves{
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
 }
