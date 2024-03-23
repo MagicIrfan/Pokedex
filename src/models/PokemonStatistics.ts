@@ -2,7 +2,7 @@ interface Statistic{
     name:string;
     value:number;
 }
-export class Statistics{
+export class PokemonStatistics {
     
     private readonly _pv : Statistic;
     private readonly _attack : Statistic;

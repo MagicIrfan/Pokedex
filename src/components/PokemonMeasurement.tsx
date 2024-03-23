@@ -6,7 +6,7 @@ interface PokemonMeasurementProps{
     icon:IconDefinition;
     className:string,
     measurementName:string,
-    measurementValue:string,
+    measurementValue:number,
     measure:string,
 }
 export const PokemonMeasurement : React.FC<PokemonMeasurementProps> = ({icon,className,measurementName,measurementValue,measure}) => {

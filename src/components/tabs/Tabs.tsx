@@ -8,8 +8,13 @@ import {
     faMap
 } from "@fortawesome/free-solid-svg-icons";
 import {ActiveTab} from "./ActiveTab";
+import DetailedPokemon from "../../models/DetailledPokemon";
 
-export const Tabs : React.FC = () => {
+interface TabsProps{
+    pokemon:DetailedPokemon;
+}
+
+export const Tabs : React.FC<TabsProps> = ({pokemon}) => {
     const [activeTab, setActiveTab] = useState("about");
 
     const handleChange = (newValue: string) : void => {
@@ -29,7 +34,7 @@ export const Tabs : React.FC = () => {
                 <TabTitle icon={faHand} title={"Moves"} className={tabIsActive("moves") ? "tab-active" : ""} onClick={() => handleChange('moves')}/>
                 <TabTitle icon={faMap} title={"Location"} className={tabIsActive("location") ? "tab-active" : ""} onClick={() => handleChange('location')}/>
             </div>
-            <ActiveTab activeTab={activeTab}/>
+            <ActiveTab activeTab={activeTab} pokemon={pokemon}/>
         </>
     );
 }

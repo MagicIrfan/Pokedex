@@ -1,14 +1,27 @@
 import React from "react";
-import {PokemonMoveCharacteristics} from "./PokemonMoveCharacteristics";
+import {PokemonMoveCharacteristic} from "./PokemonMoveCharacteristic";
 import {PokemonMoveTypeSVG} from "./PokemonMoveTypeSVG";
+import {PokemonMove as PokemonMoveModel} from "../models/PokemonMove";
+import {prettier} from "../utils/string";
 
-export const PokemonMove : React.FC = () => {
+interface PokemonMoveProps{
+    move:PokemonMoveModel;
+}
+
+export const PokemonMove : React.FC<PokemonMoveProps> = ({move}) => {
     return (
-        <div className={"pokemon-move normal"}>
-            <p className={"pokemon-move-name"}>Tackle</p>
-            <p>A full body charge attack</p>
+        <div className={`pokemon-move ${move.pokemonType}`}>
+            <p className={"pokemon-move-name"}>{prettier(move.name)}</p>
+            <p>{prettier(move.description)}</p>
             <div className={"pokemon-move-bottom"}>
-                <PokemonMoveCharacteristics/>
+                <div className={"pokemon-move-characteristics"}>
+                    <PokemonMoveCharacteristic name={"Power"} value={move.power}/>
+                    <PokemonMoveCharacteristic name={"Accuracy"} value={move.accuracy}/>
+                    <PokemonMoveCharacteristic name={"PP"} value={move.pp}/>
+                    <PokemonMoveCharacteristic name={"Priority"} value={move.priority}/>
+                    <PokemonMoveCharacteristic name={"Type"} value={prettier(move.moveType)}/>
+                    <PokemonMoveCharacteristic name={"Target"} value={prettier(move.target)}/>
+                </div>
                 <PokemonMoveTypeSVG/>
             </div>
         </div>

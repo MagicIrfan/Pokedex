@@ -2,7 +2,7 @@ import React from "react";
 
 interface PokemonMoveCharacteristicProps{
     name:string,
-    value:string
+    value:string | number
 }
 export const PokemonMoveCharacteristic : React.FC<PokemonMoveCharacteristicProps> = ({name,value}) => {
     return (

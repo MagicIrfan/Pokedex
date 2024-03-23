@@ -2,6 +2,7 @@ import React from "react";
 import {IconDefinition} from "@fortawesome/fontawesome-svg-core";
 import {faVenus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {prettier} from "../utils/string";
 
 interface PokemonCharacteristicProps{
     name:string,
@@ -14,7 +15,7 @@ export const PokemonCharacteristic : React.FC<PokemonCharacteristicProps> = ({na
         <div className={"poke-characteristic"}>
             <p className={"poke-characteristic-name"}>{name}</p>
             {abilities.map((ability : string, index : number) =>
-                <p key={index} className={className}>{icons && icons[index]? <FontAwesomeIcon icon={icons[index]}/> : <></>} {ability}</p>
+                <p key={index} className={className}>{icons && icons[index]? <FontAwesomeIcon icon={icons[index]}/> : <></>} {prettier(ability)}</p>
             )}
         </div>
     )

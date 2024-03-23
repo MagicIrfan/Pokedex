@@ -4,7 +4,7 @@ import {capitalize, pokenumber} from "../utils/string";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {PokemonTypes} from "./PokemonTypes";
 import {Image} from "./Image";
-import Pokemon from "../models/pokemon";
+import Pokemon from "../models/Pokemon";
 
 export interface PokemonProps {
     pokemon:Pokemon;

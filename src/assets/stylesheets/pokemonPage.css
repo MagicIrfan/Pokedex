@@ -163,14 +163,10 @@
 }
 
 .image-poke-hidden{
-    /*position: absolute;
-    right: 350px;*/
     filter:brightness(25%);
 }
 
 .image-poke-hidden:hover{
-    /*position: absolute;
-    right: 350px;*/
     transition: filter 0.5s ease-in-out;
     cursor: pointer;
     filter:brightness(0%);
@@ -207,11 +203,6 @@
 .stat-bar, .stat-bar-filled{
     height: 0.3em;
     border-radius: 15px;
-}
-
-.stat-bar-filled{
-    width: 50%;
-    background-color: #c22e28;
 }
 
 .evolution-specie{

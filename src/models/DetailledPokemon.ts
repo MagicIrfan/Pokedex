@@ -1,6 +1,8 @@
-import PokemonAbility from "./pokemonAbility";
-import GenderRate from "./genderRate";
-import {Statistics} from "./pokemonStatistics";
+import PokemonAbility from "./PokemonAbility";
+import GenderRate from "./GenderRate";
+import {PokemonStatistics} from "./PokemonStatistics";
+import {PokemonEvolutionChain} from "./PokemonEvolutionChain";
+import {PokemonMove} from "./PokemonMove";
 
 export default class DetailedPokemon {
 
@@ -11,18 +13,18 @@ export default class DetailedPokemon {
     private readonly _cry : string;
     private readonly _shape : string;
     private readonly _genus : string;
-    private readonly _weight : string;
-    private readonly _height : string;
+    private readonly _weight : number;
+    private readonly _height : number;
     private readonly _captureRate : number;
     private readonly _baseHappiness : number;
     private readonly _eggGroups : string[];
     private readonly _genderRate: GenderRate;
-    private readonly _statistics: Statistics;
+    private readonly _statistics: PokemonStatistics;
     private readonly _types: string[];
     private readonly _abilities: PokemonAbility[];
-    /*private readonly _evolutions Evolution[]
-    private readonly _moves Move[]
-    private readonly _location Location[]*/
+    private readonly _evolutions: PokemonEvolutionChain | undefined;
+    private readonly _moves: PokemonMove[];
+    /*private readonly _location Location[]*/
 
     constructor(builder: DetailedPokemonBuilder) {
         this._id = builder.id;
@@ -41,6 +43,8 @@ export default class DetailedPokemon {
         this._height = builder.height;
         this._captureRate = builder.captureRate;
         this._baseHappiness = builder.baseHappiness;
+        this._evolutions = builder.evolutions;
+        this._moves = builder.moves;
     }
 
     get id(): number {
@@ -87,15 +91,15 @@ export default class DetailedPokemon {
         return this._genderRate;
     }
 
-    get statistics(): Statistics {
+    get statistics(): PokemonStatistics {
         return this._statistics;
     }
 
-    get weight(): string {
+    get weight(): number {
         return this._weight;
     }
 
-    get height(): string {
+    get height(): number {
         return this._height;
     }
 
@@ -105,6 +109,14 @@ export default class DetailedPokemon {
 
     get baseHappiness(): number {
         return this._baseHappiness;
+    }
+
+    get evolutions(): PokemonEvolutionChain {
+        return this._evolutions as PokemonEvolutionChain;
+    }
+
+    get moves(): PokemonMove[] {
+        return this._moves;
     }
 
     // La méthode de construction statique pour le Builder
@@ -123,13 +135,15 @@ export class DetailedPokemonBuilder {
     cry!: string;
     shape!: string;
     genus!: string;
-    weight!: string;
-    height!: string;
+    weight!: number;
+    height!: number;
     baseHappiness!: number;
     captureRate!: number;
     eggGroups !: string[];
     genderRate!: GenderRate;
-    statistics!: Statistics;
+    statistics!: PokemonStatistics;
+    evolutions?: PokemonEvolutionChain;
+    moves: PokemonMove[] = [];
 
     withId(id: number): DetailedPokemonBuilder {
         this.id = id;
@@ -186,17 +200,17 @@ export class DetailedPokemonBuilder {
         return this;
     }
 
-    withStatistics(statistics: Statistics): DetailedPokemonBuilder {
+    withStatistics(statistics: PokemonStatistics): DetailedPokemonBuilder {
         this.statistics = statistics;
         return this;
     }
 
-    withWeight(weight: string): DetailedPokemonBuilder {
+    withWeight(weight: number): DetailedPokemonBuilder {
         this.weight = weight;
         return this;
     }
 
-    withHeight(height: string): DetailedPokemonBuilder {
+    withHeight(height: number): DetailedPokemonBuilder {
         this.height = height;
         return this;
     }
@@ -210,6 +224,17 @@ export class DetailedPokemonBuilder {
         this.captureRate = captureRate;
         return this;
     }
+
+    withEvolutions(evolutions:PokemonEvolutionChain) : DetailedPokemonBuilder{
+        this.evolutions = evolutions;
+        return this;
+    }
+
+    withMoves(moves:PokemonMove[]) : DetailedPokemonBuilder{
+        this.moves = moves;
+        return this;
+    }
+
 
     build(): DetailedPokemon {
         return new DetailedPokemon(this);

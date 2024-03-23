@@ -1,13 +1,15 @@
 import React from "react";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {EvolutionSpecie} from "../EvolutionSpecie";
+import {PokemonEvolutionChain} from "../../models/PokemonEvolutionChain";
 
-export const EvolutionTab : React.FC = () => {
+interface EvolutionTabProps{
+    evolutions:PokemonEvolutionChain;
+}
+export const EvolutionTab : React.FC<EvolutionTabProps> = ({evolutions}) => {
+
     return (
         <div className={"evolution-tab"}>
-            <EvolutionSpecie/>
-            <EvolutionSpecie/>
+
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import {getTypes} from "../services/typeservice";
+import {getTypes} from "../services/pokemonType.service";
 
 interface PokemonTypeProps {
     setTypeName: Dispatch<SetStateAction<string>>;

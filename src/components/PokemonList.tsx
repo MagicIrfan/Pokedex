@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import PokemonComponent from "./Pokemon";
-import { getPokemon} from "../services/pokemonservice";
-import Pokemon from "../models/pokemon";
+import { getPokemon} from "../services/pokemon.service";
+import Pokemon from "../models/Pokemon";
 
 interface PokemonListProps {
     name: string;
