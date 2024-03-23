@@ -19,7 +19,7 @@ export default class Pokemon{
         return this._name;
     }
 
-    get types(): any[] {
+    get types(): PokemonType[] {
         return this._types;
     }
 }
