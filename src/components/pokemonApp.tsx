@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import '../assets/stylesheets/pokemonApp.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PokemonList from "./pokemonlist";
+import PokemonList from "./PokemonList";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import Types from "./types";
+import {PokemonTypeList} from "./PokemonTypeList";
 
 const PokemonApp : React.FC = () => {
 
@@ -25,7 +25,7 @@ const PokemonApp : React.FC = () => {
                     placeholder={"Search a pokémon !"}
                 />
             </div>
-            <Types setTypeName={setTypeName}/>
+            <PokemonTypeList setTypeName={setTypeName}/>
             <PokemonList typeName={typeName} name={name} />
         </div>
     );

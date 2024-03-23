@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import PokemonComponent from "./pokemon";
+import PokemonComponent from "./Pokemon";
 import { getPokemon} from "../services/pokemonservice";
 import Pokemon from "../models/pokemon";
 import {PokemonListProps} from "../models/pokemonListProps";
