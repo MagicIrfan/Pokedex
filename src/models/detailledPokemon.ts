@@ -1,6 +1,4 @@
-import PokemonType from "./pokemonType";
 import PokemonAbility from "./pokemonAbility";
-import EggGroup from "./eggGroup";
 import GenderRate from "./genderRate";
 import {Statistics} from "./pokemonStatistics";
 
@@ -17,10 +15,10 @@ export default class DetailedPokemon {
     private readonly _height : string;
     private readonly _captureRate : number;
     private readonly _baseHappiness : number;
-    private readonly _eggGroups : EggGroup[];
+    private readonly _eggGroups : string[];
     private readonly _genderRate: GenderRate;
     private readonly _statistics: Statistics;
-    private readonly _types: PokemonType[];
+    private readonly _types: string[];
     private readonly _abilities: PokemonAbility[];
     /*private readonly _evolutions Evolution[]
     private readonly _moves Move[]
@@ -57,7 +55,7 @@ export default class DetailedPokemon {
         return this._description;
     }
 
-    get types(): PokemonType[] {
+    get types(): string[] {
         return this._types;
     }
 
@@ -81,7 +79,7 @@ export default class DetailedPokemon {
         return this._genus;
     }
 
-    get eggGroups(): EggGroup[] {
+    get eggGroups(): string[] {
         return this._eggGroups;
     }
 
@@ -119,7 +117,7 @@ export class DetailedPokemonBuilder {
     id!: number;
     name!: string;
     description!: string;
-    types: PokemonType[] = [];
+    types!: string[];
     abilities: PokemonAbility[] = [];
     growthRate!: string;
     cry!: string;
@@ -129,7 +127,7 @@ export class DetailedPokemonBuilder {
     height!: string;
     baseHappiness!: number;
     captureRate!: number;
-    eggGroups : EggGroup[] = [];
+    eggGroups !: string[];
     genderRate!: GenderRate;
     statistics!: Statistics;
 
@@ -148,7 +146,7 @@ export class DetailedPokemonBuilder {
         return this;
     }
 
-    withTypes(types: PokemonType[]): DetailedPokemonBuilder {
+    withTypes(types: string[]): DetailedPokemonBuilder {
         this.types = types;
         return this;
     }
@@ -178,7 +176,7 @@ export class DetailedPokemonBuilder {
         return this;
     }
 
-    withEggGroups(eggGroups: EggGroup[]): DetailedPokemonBuilder {
+    withEggGroups(eggGroups: string[]): DetailedPokemonBuilder {
         this.eggGroups = eggGroups;
         return this;
     }

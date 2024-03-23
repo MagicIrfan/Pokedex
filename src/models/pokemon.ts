@@ -1,11 +1,9 @@
-import PokemonType from "./pokemonType";
-
 export default class Pokemon{
     private readonly _id: number;
     private readonly _name: string;
-    private readonly _types: PokemonType[];
+    private readonly _types: string[];
 
-    constructor(id: number, name: string, types: PokemonType[]) {
+    constructor(id: number, name: string, types: string[]) {
         this._id = id;
         this._name = name;
         this._types = types;
@@ -19,7 +17,7 @@ export default class Pokemon{
         return this._name;
     }
 
-    get types(): PokemonType[] {
+    get types(): string[] {
         return this._types;
     }
 }

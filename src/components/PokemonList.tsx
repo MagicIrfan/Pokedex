@@ -25,7 +25,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
         return pokemons.filter((pokemon) =>
             pokemon.name.includes(name) &&
             (typeName !== "all"
-                ? pokemon.types.some(typeInfo => typeInfo.name === typeName)
+                ? pokemon.types.some(typeInfo => typeInfo === typeName)
                 : true))
     }, [typeName, name, pokemons]);
 

@@ -18,7 +18,7 @@ const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
     }
 
     return (
-        <div className={"pokemon " + (types[0].name)} onClick={() => onClickPokemon(id)}>
+        <div className={"pokemon " + (types[0])} onClick={() => onClickPokemon(id)}>
             <p className="poke-number">{pokenumber(id)}</p>
             <h2>{capitalize(name)}</h2>
             <div className="poke-body">

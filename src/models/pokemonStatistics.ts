@@ -11,13 +11,13 @@ export class Statistics{
     private readonly _specialDefense : Statistic;
     private readonly _speed : Statistic;
 
-    constructor(pv: number, attack: number, defense: number, specialAttack: number, specialDefense: number, speed: number) {
-        this._pv = {name:"HP", value:pv};
-        this._attack = {name:"Attack", value:attack};
-        this._defense = {name:"Defense", value:defense};
-        this._specialAttack = {name:"Special Attack", value:specialAttack};
-        this._specialDefense = {name:"Special Defense", value:specialDefense};
-        this._speed = {name:"Speed", value:speed};
+    constructor(statistics: number[]) {
+        this._pv = {name:"HP", value:statistics[0]};
+        this._attack = {name:"Attack", value:statistics[1]};
+        this._defense = {name:"Defense", value:statistics[2]};
+        this._specialAttack = {name:"Special Attack", value:statistics[3]};
+        this._specialDefense = {name:"Special Defense", value:statistics[4]};
+        this._speed = {name:"Speed", value:statistics[5]};
     }
 
     get pv(): Statistic {

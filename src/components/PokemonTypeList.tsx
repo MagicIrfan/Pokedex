@@ -1,13 +1,12 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {getTypes} from "../services/typeservice";
-import PokemonType from "../models/pokemonType";
 
 interface PokemonTypeProps {
     setTypeName: Dispatch<SetStateAction<string>>;
 }
 export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
 
-    const [types, setTypes] = useState<Array<{ type: PokemonType, isSelected: boolean }>>([])
+    const [types, setTypes] = useState<Array<{ type: string, isSelected: boolean }>>([])
 
     const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -16,7 +15,7 @@ export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
         // Create a new array with updated isSelected property
         const updatedTypes = types.map(item => ({
             type: item.type,
-            isSelected: item.type.name === typeName
+            isSelected: item.type === typeName
         }));
 
         setTypeName(typeName);
@@ -25,10 +24,10 @@ export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
 
     useEffect(() => {
         const fetchPokemonTypes = async () => {
-            const fetchTypes : PokemonType[] = await getTypes();
-            const all : PokemonType = new PokemonType("all");
-            const temp : { type: PokemonType, isSelected: boolean }[] = [{type:all, isSelected:true}];
-            temp.push(...fetchTypes.map((type: PokemonType) => ({
+            const fetchTypes : string[] = await getTypes();
+            const all : string = "all";
+            const temp : { type: string, isSelected: boolean }[] = [{type:all, isSelected:true}];
+            temp.push(...fetchTypes.map((type: string) => ({
                 type,
                 isSelected: false
             })));
@@ -40,11 +39,11 @@ export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
     const listItems = types.map(type => (
         <button
             onClick={onClickType}
-            key={type.type.name}
-            value={type.type.name}
-            className={`type-button ${type.type.name} ${type.isSelected ? 'selected' : ''}`}
+            key={type.type}
+            value={type.type}
+            className={`type-button ${type.type} ${type.isSelected ? 'selected' : ''}`}
         >
-            {type.type.name.toUpperCase()}
+            {type.type.toUpperCase()}
         </button>
     ));
     return (

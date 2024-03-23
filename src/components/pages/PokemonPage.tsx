@@ -8,7 +8,8 @@ import {Tabs} from "../tabs/Tabs";
 import {Image} from "../Image";
 import {ImageContainer} from "../ImageContainer";
 import {PokemonTypes} from "../PokemonTypes";
-import PokemonType from "../../models/pokemonType";
+import DetailedPokemon from "../../models/detailledPokemon";
+import {getDetailedPokemon} from "../../services/pokemonservice";
 
 const PokemonPage : React.FC = () => {
     const {id} = useParams();
@@ -19,6 +20,16 @@ const PokemonPage : React.FC = () => {
 
     useEffect(() : () => void => {
         const pokemonId : number = Number(id);
+
+        getDetailedPokemon(pokemonId)
+            .then((data : DetailedPokemon | null):void  =>{
+                if(data){
+                    const pokemon : DetailedPokemon = data;
+                    console.log(pokemon)
+                }
+            })
+            .catch(console.error);
+
         if (isNaN(pokemonId)) {
             console.warn('Invalid Pokémon ID');
             return () : void => {};
@@ -50,7 +61,7 @@ const PokemonPage : React.FC = () => {
                     <div className={"left"}>
                         <FontAwesomeIcon className={"return-button"} icon={faArrowLeft} onClick={() => navigate("/")}/>
                         <h1>Bulbasaur   <FontAwesomeIcon className={"volume"} icon={faVolumeHigh} onClick={() => playPokemonCry()}/></h1>
-                        <PokemonTypes types={[new PokemonType("grass"), new PokemonType("poison")]}/>
+                        <PokemonTypes types={["grass", "poison"]}/>
                     </div>
                     <div className={"right"}>
                         <h1>{pokenumber(1)}</h1>
