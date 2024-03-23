@@ -2,9 +2,13 @@ import React from 'react';
 import pokeball from "../assets/images/pokeball.png"
 import {capitalize, pokenumber} from "../utils/string";
 import {NavigateFunction, useNavigate} from "react-router-dom";
-import {PokemonProps} from "../models/pokemonProps";
 import {PokemonTypes} from "./PokemonTypes";
 import {Image} from "./Image";
+import Pokemon from "../models/pokemon";
+
+export interface PokemonProps {
+    pokemon:Pokemon;
+}
 
 const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
     const { types, id, name } = pokemon;

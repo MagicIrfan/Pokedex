@@ -1,7 +1,7 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMars, faRuler, faVenus, faWeightHanging} from "@fortawesome/free-solid-svg-icons";
+import {faMars, faVenus} from "@fortawesome/free-solid-svg-icons";
 import {PokemonCharacteristic} from "../PokemonCharacteristic";
+import {PokemonMeasurements} from "../PokemonMeasurements";
 
 export const AboutTab : React.FC = () => {
     return (
@@ -11,18 +11,7 @@ export const AboutTab : React.FC = () => {
                 POKéMON.
                 His main color is green and lives in grassland.
             </p>
-            <div className={"poke-measurements"}>
-                <div className={"poke-height"}>
-                    <p className={"poke-measurements-title"}><FontAwesomeIcon icon={faRuler}/> Height</p>
-                    <p>26 kg</p>
-                </div>
-                <div className={"poke-weight"}>
-                    <p className={"poke-measurements-title"}><FontAwesomeIcon
-                        icon={faWeightHanging}/> Weight
-                    </p>
-                    <p>0.6 m</p>
-                </div>
-            </div>
+            <PokemonMeasurements />
             <PokemonCharacteristic name={"Abilities"} abilities={["Overgrow","Chlorophyll"]} className={"poke-ability"}/>
             <PokemonCharacteristic name={"Growth rate"} abilities={["Slow"]}/>
             <PokemonCharacteristic name={"Capture rate"} abilities={["35"]}/>

@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import '../assets/stylesheets/pokemonPage.css';
+import '../../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {pokenumber} from "../utils/string";
-import {Tabs} from "./tabs/Tabs";
-import {Image} from "./Image";
-import {ImageContainer} from "./ImageContainer";
-import {PokemonTypes} from "./PokemonTypes";
-import PokemonType from "../models/pokemonType";
+import {pokenumber} from "../../utils/string";
+import {Tabs} from "../tabs/Tabs";
+import {Image} from "../Image";
+import {ImageContainer} from "../ImageContainer";
+import {PokemonTypes} from "../PokemonTypes";
+import PokemonType from "../../models/pokemonType";
 
 const PokemonPage : React.FC = () => {
     const {id} = useParams();

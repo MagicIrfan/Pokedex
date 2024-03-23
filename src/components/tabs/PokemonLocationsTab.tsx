@@ -1,24 +1,15 @@
 import React from "react";
+import {PokemonLocation} from "../PokemonLocation";
 
 export const PokemonLocationsTab : React.FC = () => {
     return (
         <>
-            <div className={"pokemon-location"}>
-                <p className={"poke-ability"}>Kanto</p>
-                <p>Pallet Town</p>
-            </div>
-            <div className={"pokemon-location"}>
-                <p className={"poke-ability"}>Kanto</p>
-                <p>Pallet Town</p>
-            </div>
-            <div className={"pokemon-location"}>
-                <p className={"poke-ability"}>Kanto</p>
-                <p>Pallet Town</p>
-            </div>
-            <div className={"pokemon-location"}>
-                <p className={"poke-ability"}>Kanto</p>
-                <p>Pallet Town</p>
-            </div>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
+            <PokemonLocation regionName={"Kanto"} locationName={"Pallet Town"} className={"poke-ability"}/>
         </>
     );
 }

@@ -2,9 +2,11 @@ import React, { useEffect, useState, useMemo } from 'react';
 import PokemonComponent from "./Pokemon";
 import { getPokemon} from "../services/pokemonservice";
 import Pokemon from "../models/pokemon";
-import {PokemonListProps} from "../models/pokemonListProps";
 
-
+interface PokemonListProps {
+    name: string;
+    typeName:string;
+}
 
 const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);

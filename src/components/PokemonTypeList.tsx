@@ -2,10 +2,10 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {getTypes} from "../services/typeservice";
 import PokemonType from "../models/pokemonType";
 
-interface TypeProps {
+interface PokemonTypeProps {
     setTypeName: Dispatch<SetStateAction<string>>;
 }
-export const PokemonTypeList : React.FC<TypeProps> = ({setTypeName}) => {
+export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
 
     const [types, setTypes] = useState<Array<{ type: PokemonType, isSelected: boolean }>>([])
 
