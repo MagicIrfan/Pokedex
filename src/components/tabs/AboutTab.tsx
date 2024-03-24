@@ -20,11 +20,15 @@ export const AboutTab : React.FC<AboutTabProps> = ({pokemon}) => {
             }}>
                 <PokemonMeasurements pokemon={pokemon} />
                 <PokemonCharacteristic name={"Abilities"} abilities={pokemon.abilities.map((ability : PokemonAbility )=>ability.name)} className={"poke-ability"}/>
-                <PokemonCharacteristic name={"Growth rate"} abilities={[pokemon.growthRate]}/>
+                {pokemon.growthRate.length !== 0 && <PokemonCharacteristic name={"Growth rate"} abilities={[pokemon.growthRate]}/>}
                 <PokemonCharacteristic name={"Capture rate"} abilities={[`${pokemon.captureRate}`]}/>
                 <PokemonCharacteristic name={"Base happiness"} abilities={[`${pokemon.baseHappiness}%`]}/>
                 <PokemonCharacteristic name={"Egg groups"} abilities={pokemon.eggGroups} className={"poke-ability"}/>
-                <PokemonCharacteristic name={"Gender rate"} abilities={[`${pokemon.genderRate.male}%`,`${pokemon.genderRate.female}%`]} icons={[faMars,faVenus]}/>
+                {pokemon.genderRate ?
+                    <PokemonCharacteristic name={"Gender rate"} abilities={[`${pokemon.genderRate.male}%`,`${pokemon.genderRate.female}%`]} icons={[faMars,faVenus]}/>
+                    :
+                    <p>This pokemon is asexual !</p>
+                }
             </div>
         </>
     );

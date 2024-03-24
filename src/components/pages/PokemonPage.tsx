@@ -3,18 +3,19 @@ import '../../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {capitalize, pokenumber} from "../../utils/string";
+import {capitalize, pokenumber, prettier} from "../../utils/string";
 import {Tabs} from "../tabs/Tabs";
 import {Image} from "../Image";
 import {ImageContainer} from "../ImageContainer";
 import {PokemonTypes} from "../PokemonTypes";
 import DetailedPokemon from "../../models/DetailledPokemon";
-import {getDetailedPokemon} from "../../services/pokemon.service";
+import {getDetailedPokemon, getPokemonCount} from "../../services/pokemon.service";
 
 const PokemonPage : React.FC = () => {
     const {id} = useParams();
     const pokemonId : number = Number(id);
     const [pokemon, setPokemon] = useState<DetailedPokemon>();
+    const [pokemonCount, setPokemonCount] = useState<number>(0);
     const audio = useRef(new Audio());
     const navigate : NavigateFunction = useNavigate();
     const previousId : number = pokemonId - 1;
@@ -44,8 +45,14 @@ const PokemonPage : React.FC = () => {
             audio.current.src = "";
             //setPokemon(undefined);
         };
-    }, [id, pokemonId]);
+    }, [pokemonId]);
 
+    useEffect((): void => {
+        (async () : Promise<void> => {
+            console.log(await getPokemonCount())
+            setPokemonCount(await getPokemonCount());
+        })();
+    }, []);
 
     const playPokemonCry = async () : Promise<void> => {
         await audio.current.play();
@@ -64,17 +71,17 @@ const PokemonPage : React.FC = () => {
                             <FontAwesomeIcon className={"return-button"} icon={faArrowLeft} onClick={() => navigate("/")}/>
                             <h1 style={{
                                 fontSize:'45px'
-                            }}>{capitalize(pokemon.name)}   <FontAwesomeIcon className={"volume"} icon={faVolumeHigh} onClick={() => playPokemonCry()}/></h1>
+                            }}>{prettier(pokemon.name)}   <FontAwesomeIcon className={"volume"} icon={faVolumeHigh} onClick={() => playPokemonCry()}/></h1>
                             <PokemonTypes style={{
                                 fontSize:'20px'
-                            }} types={pokemon.types}/>
+                            }} types={pokemon.types} colored={true}/>
                         </div>
                         <div className={"right"}>
                             <h1 style={{
                                 fontSize:'45px'
                             }}>{pokenumber(pokemonId)}</h1>
-                            <h2>{pokemon.genus}</h2>
-                            <h2>{capitalize(pokemon.shape)}</h2>
+                            <h2>{prettier(pokemon.genus)}</h2>
+                            <h2>{prettier(pokemon.shape)}</h2>
                         </div>
                     </div>
                     <div className={"pokemon-header"}>
@@ -82,16 +89,16 @@ const PokemonPage : React.FC = () => {
                             {previousId >= 1 &&
                                 <ImageContainer image={<Image className={"image-poke-hidden"}
                                                               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${previousId}.png`}
-                                                              width={150} height={150}
+                                                              width={200} height={200}
                                                               alt={"pokemon"}/>} className={"pokemon-previous-image"} onClick={() => changePokemon(previousId)}/>
                             }
                             <ImageContainer image={<Image
                                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                                width={225} height={225} alt="pokemon"/>} className={"pokemon-main-image-circle"} onClick={() => changePokemon(previousId)}/>
-                            {nextId <= 151 &&
+                                width={275} height={275} alt="pokemon"/>} className={"pokemon-main-image-circle"} onClick={() => changePokemon(previousId)}/>
+                            {nextId <= pokemonCount &&
                                 <ImageContainer image={<Image className={"image-poke-hidden"}
                                                               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${nextId}.png`}
-                                                              width={150} height={150}
+                                                              width={200} height={200}
                                                               alt={""}/>} className={"pokemon-next-image"} onClick={() => changePokemon(nextId)}/>}
                         </div>
                     </div>

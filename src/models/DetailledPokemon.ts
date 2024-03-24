@@ -18,7 +18,7 @@ export default class DetailedPokemon {
     private readonly _captureRate : number;
     private readonly _baseHappiness : number;
     private readonly _eggGroups : string[];
-    private readonly _genderRate: GenderRate;
+    private readonly _genderRate?: GenderRate;
     private readonly _statistics: PokemonStatistics;
     private readonly _types: string[];
     private readonly _abilities: PokemonAbility[];
@@ -88,7 +88,7 @@ export default class DetailedPokemon {
     }
 
     get genderRate(): GenderRate {
-        return this._genderRate;
+        return this._genderRate as GenderRate;
     }
 
     get statistics(): PokemonStatistics {

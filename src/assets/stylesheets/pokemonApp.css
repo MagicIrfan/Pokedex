@@ -89,6 +89,15 @@
     background: #ffffff4d;
 }
 
+.type-colored{
+    width: 4em;
+    border-radius:12px;
+    padding: 5px;
+    background: var(--color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    filter:brightness(90%);
+}
+
 .poke-body{
     width: 100%;
     display: flex;

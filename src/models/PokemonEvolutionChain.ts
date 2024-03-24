@@ -1,9 +1,10 @@
 import {PokemonEvolutionDetail} from "./PokemonEvolutionDetail";
 import Pokemon from "./Pokemon";
+import PokemonSpecie from "./PokemonSpecie";
 
 export class PokemonEvolutionChain {
 
-    private readonly _pokemon : Pokemon;
+    private readonly _pokemon : PokemonSpecie;
     private readonly _evolvesTo : PokemonEvolutionChain[] = [];
     private readonly _details : PokemonEvolutionDetail[] = [];
 
@@ -13,7 +14,7 @@ export class PokemonEvolutionChain {
         this._details = builder.details;
     }
 
-    get pokemon(): Pokemon {
+    get pokemon(): PokemonSpecie {
         return this._pokemon;
     }
 
@@ -31,11 +32,11 @@ export class PokemonEvolutionChain {
 }
 
 class PokemonEvolutionChainBuilder{
-    pokemon !: Pokemon;
+    pokemon !: PokemonSpecie;
     evolvesTo !: PokemonEvolutionChain[];
     details !: PokemonEvolutionDetail[];
 
-    withPokemon(pokemon : Pokemon) : PokemonEvolutionChainBuilder{
+    withPokemon(pokemon : PokemonSpecie) : PokemonEvolutionChainBuilder{
         this.pokemon = pokemon;
         return this;
     }

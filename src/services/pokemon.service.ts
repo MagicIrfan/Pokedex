@@ -6,15 +6,41 @@ import GenderRate from "../models/GenderRate";
 import {PokemonEvolutionChain} from "../models/PokemonEvolutionChain";
 import {PokemonEvolutionDetail} from "../models/PokemonEvolutionDetail";
 import {PokemonMove} from "../models/PokemonMove";
+import PokemonSpecie from "../models/PokemonSpecie";
+
+
+export const fetchData = async (url : string)=> {
+    try {
+        const response = await axios.get(url);
+        if (response.status === 200 && response.data) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error('Failed to fetch Pokemon:', error);
+    }
+    return null;
+}
 
 export const getPokemon = async (id: number | string): Promise<Pokemon | null> => {
     try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-        if (response.status === 200 && response.data) {
-            const data = response.data;
-            const {id, name, types} = data;
+        const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        if (response) {
+            const {id, name, types} = response;
             const pokeTypes: string[] = types.map((apiType: { type: { name: string; }; }) => apiType.type.name);
             return new Pokemon(id, name, pokeTypes);
+        }
+    } catch (error) {
+        console.error('Failed to fetch Pokemon:', error);
+    }
+    return null;
+};
+
+export const getPokemonSpecie = async (url:string): Promise<PokemonSpecie | null> => {
+    try {
+        const response = await fetchData(url);
+        if (response) {
+            const {id, name} = response;
+            return new PokemonSpecie(id, name);
         }
     } catch (error) {
         console.error('Failed to fetch Pokemon:', error);
@@ -60,17 +86,19 @@ export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | 
             const description = flavor_text_entries.find((entry:any) => entry.language.name === "en")?.flavor_text ?? "";
             const genus = genera.find((entry:any) => entry.language.name === "en")?.genus ?? "";
             const pokeEggGroup = egg_groups.map((egg_group:any) => egg_group.name);
-            const pokeFemaleRate : number = gender_rate / 8 * 100;
-            const pokeGenderRate : GenderRate = new GenderRate(100 - pokeFemaleRate, pokeFemaleRate)
             detailedPokemonBuilder
                 .withBaseHappiness(base_happiness)
                 .withCaptureRate(capture_rate)
-                .withShape(shape.name)
+                .withShape(shape ? shape.name : "")
                 .withDescription(description)
                 .withEggGroups(pokeEggGroup)
                 .withGenus(genus)
-                .withGenderRate(pokeGenderRate)
                 .withGrowthRate(growth_rate.name);
+            if(gender_rate !== -1){
+                const pokeFemaleRate : number = gender_rate / 8 * 100;
+                const pokeGenderRate : GenderRate = new GenderRate(100 - pokeFemaleRate, pokeFemaleRate)
+                detailedPokemonBuilder.withGenderRate(pokeGenderRate);
+            }
             await fetchEvolutionChain(evolution_chain.url,detailedPokemonBuilder);
         }
 
@@ -88,9 +116,9 @@ export const fetchEvolutionChain = async (url : string, detailedPokemonBuilder :
             const { chain } = response.data;
             if (chain && chain.evolves_to.length) {
                 const buildChains = async (evolutionData: any): Promise<PokemonEvolutionChain> => {
-                        const pokemonName: string = evolutionData.species.name;
+                        const pokemonName: string = evolutionData.species.url;
                         const details: PokemonEvolutionDetail[] = evolutionData.evolution_details.map((detail: any) => new PokemonEvolutionDetail(detail.trigger.name));
-                        const pokemon : Pokemon = await getPokemon(pokemonName) as Pokemon;
+                        const pokemon : PokemonSpecie = await getPokemonSpecie(pokemonName) as PokemonSpecie;
                         const evolutionChains : PokemonEvolutionChain[] = [];
                         const evolvesToData = evolutionData.evolves_to;
                         if (evolvesToData.length) {
@@ -129,6 +157,19 @@ const getPokemonMove = async (url : string): Promise<PokemonMove | null> => {
         console.error('Failed to fetch evolution chain:', error);
         return null;
     }
+}
+
+export const getPokemonCount = async (): Promise<number> => {
+    try {
+        const response = await fetchData("https://pokeapi.co/api/v2/pokemon-species/?limit=0");
+        if(response){
+            return response.count;
+        }
+    }
+    catch (error) {
+        console.error('Failed to fetch evolution chain:', error);
+    }
+    return 0;
 }
 
 
