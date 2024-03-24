@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import PokemonComponent from "./Pokemon";
-import { getPokemon} from "../services/pokemon.service";
+import React, { useEffect, useState, useMemo, Suspense } from 'react';
+import {getPokemon, getPokemonCount} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
+
+const PokemonComponent = React.lazy(() => import('./Pokemon'));
 
 interface PokemonListProps {
     name: string;
@@ -13,7 +14,8 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
 
     useEffect((): void => {
         const fetchAllPokemons = async () => {
-            const promises = Array.from({ length: 151 }, (_, index) => getPokemon(index + 1));
+            const nbPokemon : number = await getPokemonCount();
+            const promises = Array.from({ length: nbPokemon }, (_, index) => getPokemon(index + 1));
             const results = await Promise.all(promises);
             const pokemons : Pokemon[] = results.filter(pokemon => pokemon !== null) as Pokemon[];
             setPokemons(pokemons);
@@ -22,15 +24,17 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     }, []);
 
     const filteredPokemons : Pokemon[] = useMemo(() => {
-        return pokemons.filter((pokemon) =>
+        return pokemons.filter((pokemon : Pokemon) =>
             pokemon.name.includes(name) &&
             (typeName !== "all"
-                ? pokemon.types.some(typeInfo => typeInfo === typeName)
+                ? pokemon.types.some((typeInfo : string) : boolean => typeInfo.toLowerCase() === typeName.toLowerCase())
                 : true))
     }, [typeName, name, pokemons]);
 
-    const listItems : JSX.Element[] = filteredPokemons.map(pokemon => (
-        <PokemonComponent pokemon={pokemon} key={pokemon.id} />
+    const listItems : JSX.Element[] = filteredPokemons.map((pokemon : Pokemon, index : number) => (
+        <Suspense key={pokemon.id} fallback={<div key={index}>Chargement...</div>}>
+            <PokemonComponent pokemon={pokemon}/>
+        </Suspense>
     ));
 
     return (

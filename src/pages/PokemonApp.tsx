@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import '../../assets/stylesheets/pokemonApp.css';
+import '../assets/stylesheets/pokemonApp.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PokemonList from "../PokemonList";
+import PokemonList from "../components/PokemonList";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import {PokemonTypeList} from "../PokemonTypeList";
+import {PokemonTypeList} from "../components/PokemonTypeList";
 
 const PokemonApp : React.FC = () => {
 

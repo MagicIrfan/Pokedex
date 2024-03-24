@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {EvolutionSpecie} from "../EvolutionSpecie";
 import DetailedPokemon from "../../models/DetailledPokemon";
-import {PokemonContext} from "../pages/PokemonPage";
+import {PokemonContext} from "../../pages/PokemonPage";
 import {NoDataContent} from "../NoDataContent";
 
 export const EvolutionTab : React.FC = () => {

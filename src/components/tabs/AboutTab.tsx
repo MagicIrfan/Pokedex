@@ -5,7 +5,7 @@ import {PokemonMeasurements} from "../PokemonMeasurements";
 import DetailedPokemon from "../../models/DetailledPokemon";
 import {prettier} from "../../utils/string";
 import PokemonAbility from "../../models/PokemonAbility";
-import {PokemonContext} from "../pages/PokemonPage";
+import {PokemonContext} from "../../pages/PokemonPage";
 
 export const AboutTab : React.FC = () => {
     const pokemon : DetailedPokemon = useContext(PokemonContext);

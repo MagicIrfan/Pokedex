@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useMemo, useRef, useState, createContext} from 'react';
-import '../../assets/stylesheets/pokemonPage.css';
+import '../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {capitalize, pokenumber, prettier} from "../../utils/string";
-import {Tabs} from "../tabs/Tabs";
-import {Image} from "../Image";
-import {ImageContainer} from "../ImageContainer";
-import {PokemonTypes} from "../PokemonTypes";
-import DetailedPokemon from "../../models/DetailledPokemon";
-import {getDetailedPokemon, getPokemonCount} from "../../services/pokemon.service";
+import {capitalize, pokenumber, prettier} from "../utils/string";
+import {Tabs} from "../components/tabs/Tabs";
+import {Image} from "../components/Image";
+import {ImageContainer} from "../components/ImageContainer";
+import {PokemonTypes} from "../components/PokemonTypes";
+import DetailedPokemon from "../models/DetailledPokemon";
+import {getDetailedPokemon, getPokemonCount} from "../services/pokemon.service";
 export const PokemonContext = createContext<DetailedPokemon | null>(null) as React.Context<DetailedPokemon>;
 const PokemonPage : React.FC = () => {
     const {id} = useParams();

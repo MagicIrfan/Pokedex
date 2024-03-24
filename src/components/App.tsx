@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import PokemonApp from "./pages/PokemonApp";
-import PokemonPage from "./pages/PokemonPage";
+import PokemonApp from "../pages/PokemonApp";
+import PokemonPage from "../pages/PokemonPage";
 const App : React.FC = () => {
 
 
