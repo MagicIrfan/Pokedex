@@ -3,10 +3,11 @@ import {capitalize} from "../utils/string";
 
 interface PokemonTypeProps {
     type:string;
+    style?:any;
 }
-export const PokemonTypeComponent : React.FC<PokemonTypeProps> = ({type}) => {
+export const PokemonTypeComponent : React.FC<PokemonTypeProps> = ({type, style = {}}) => {
     return (
-        <p className={"type " + type}>
+        <p className={"type " + type} style={style}>
             {capitalize(type)}
         </p>
     );

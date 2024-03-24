@@ -6,10 +6,19 @@ interface EvolutionTabProps{
     evolutions:PokemonEvolutionChain;
 }
 export const EvolutionTab : React.FC<EvolutionTabProps> = ({evolutions}) => {
-
+    const canEvolve : boolean = evolutions && evolutions.evolvesTo.length !== 0;
     return (
         <div className={"evolution-tab"}>
-            <EvolutionSpecie evolutions={evolutions}/>
+            { canEvolve ?
+                <EvolutionSpecie evolutions={evolutions}/>
+                :
+                <div style={{
+                    textAlign:"center",
+                    padding:'5em'
+                }}>
+                    <h1>This pokémon can't evolve !</h1>
+                </div>
+            }
         </div>
     );
 }

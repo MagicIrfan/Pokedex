@@ -11,7 +11,7 @@ export const PokemonMovesTab : React.FC<PokemonMovesTabProps> = ({moves}) => {
     useEffect(() : void => {
         const elements = moves.map((move : PokemonMove) => <PokemonMoveElement move={move}/>);
         setMovesElements(elements);
-    });
+    }, [moves]);
     return (
         <div className={"pokemon-moves"}>
             {moveElements}

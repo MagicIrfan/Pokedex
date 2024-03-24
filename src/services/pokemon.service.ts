@@ -86,7 +86,7 @@ export const fetchEvolutionChain = async (url : string, detailedPokemonBuilder :
         const response = await axios.get(url);
         if (response.status === 200 && response.data) {
             const { chain } = response.data;
-            if (chain) {
+            if (chain && chain.evolves_to.length) {
                 const buildChains = async (evolutionData: any): Promise<PokemonEvolutionChain> => {
                         const pokemonName: string = evolutionData.species.name;
                         const details: PokemonEvolutionDetail[] = evolutionData.evolution_details.map((detail: any) => new PokemonEvolutionDetail(detail.trigger.name));

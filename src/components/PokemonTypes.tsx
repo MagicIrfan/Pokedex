@@ -3,13 +3,14 @@ import {PokemonTypeComponent} from "./PokemonTypeComponent"
 
 interface PokemonTypesProps {
     types:string[];
+    style?:any;
 }
-export const PokemonTypes : React.FC<PokemonTypesProps> = ({types}) => {
+export const PokemonTypes : React.FC<PokemonTypesProps> = ({types, style = {}}) => {
     return (
         <div className={"poke-types"}>
             {types.map((type: string, index: number) => {
                 return (
-                    <PokemonTypeComponent key={index} type={type}/>
+                    <PokemonTypeComponent style={style} key={index} type={type}/>
                 );
             })}
         </div>

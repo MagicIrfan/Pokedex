@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import '../../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
@@ -15,47 +15,40 @@ const PokemonPage : React.FC = () => {
     const {id} = useParams();
     const pokemonId : number = Number(id);
     const [pokemon, setPokemon] = useState<DetailedPokemon>();
-    let audio : HTMLAudioElement;
+    const audio = useRef(new Audio());
     const navigate : NavigateFunction = useNavigate();
     const previousId : number = pokemonId - 1;
     const nextId : number = pokemonId + 1;
 
     useEffect((): () => void => {
-
-        const fetchPokemon = async () => {
+        (async () => {
             if (!isNaN(pokemonId)) {
                 try {
                     const data = await getDetailedPokemon(pokemonId);
                     if (data) {
-                        console.log(data);
                         setPokemon(data);
+                        if (data.cry) {
+                            audio.current.src = data.cry;
+                        }
                     }
                 } catch (error) {
                     console.error('Failed to fetch Pokemon:', error);
                 }
-
-
-                audio = new Audio(pokemon?.cry);
-
-                return () : void => {
-                    audio.pause();
-                    audio.src = "";
-                };
             } else {
                 console.warn('Invalid Pokémon ID');
             }
-        };
+        })();
 
-        const cleanup = fetchPokemon();
-
-        return () => {
-            cleanup.then(cleanupFunc => cleanupFunc?.());
+        return () : void => {
+            audio.current.pause();
+            audio.current.src = "";
+            //setPokemon(undefined);
         };
-    }, [id]);
+    }, [id, pokemonId]);
 
 
     const playPokemonCry = async () : Promise<void> => {
-        await audio.play();
+        await audio.current.play();
     }
 
     function changePokemon(number: number) : void {
@@ -69,13 +62,19 @@ const PokemonPage : React.FC = () => {
                     <div className={"header"}>
                         <div className={"left"}>
                             <FontAwesomeIcon className={"return-button"} icon={faArrowLeft} onClick={() => navigate("/")}/>
-                            <h1>{capitalize(pokemon.name)}   <FontAwesomeIcon className={"volume"} icon={faVolumeHigh} onClick={() => playPokemonCry()}/></h1>
-                            <PokemonTypes types={pokemon.types}/>
+                            <h1 style={{
+                                fontSize:'45px'
+                            }}>{capitalize(pokemon.name)}   <FontAwesomeIcon className={"volume"} icon={faVolumeHigh} onClick={() => playPokemonCry()}/></h1>
+                            <PokemonTypes style={{
+                                fontSize:'20px'
+                            }} types={pokemon.types}/>
                         </div>
                         <div className={"right"}>
-                            <h1>{pokenumber(pokemonId)}</h1>
-                            <h3>{pokemon.genus}</h3>
-                            <h3>{capitalize(pokemon.shape)}</h3>
+                            <h1 style={{
+                                fontSize:'45px'
+                            }}>{pokenumber(pokemonId)}</h1>
+                            <h2>{pokemon.genus}</h2>
+                            <h2>{capitalize(pokemon.shape)}</h2>
                         </div>
                     </div>
                     <div className={"pokemon-header"}>
