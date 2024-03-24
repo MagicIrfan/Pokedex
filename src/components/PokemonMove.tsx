@@ -22,7 +22,7 @@ export const PokemonMove : React.FC<PokemonMoveProps> = ({move}) => {
                     <PokemonMoveCharacteristic name={"Type"} value={prettier(move.moveType)}/>
                     <PokemonMoveCharacteristic name={"Target"} value={prettier(move.target)}/>
                 </div>
-                <PokemonMoveTypeSVG/>
+                <PokemonMoveTypeSVG type={move.pokemonType}/>
             </div>
         </div>
     );

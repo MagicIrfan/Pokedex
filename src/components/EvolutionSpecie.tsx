@@ -26,7 +26,7 @@ export const EvolutionSpecie : React.FC<EvolutionSpecieProps> = ({evolutions}) =
                         flexDirection:'row',
                         alignItems:'center',
                         width: '100%',
-                        justifyContent: 'center'
+                        justifyContent: 'space-evenly'
                     }}>
                         <div className={"evolution-method"}>
                             <FontAwesomeIcon style={{fontSize: '30px'}} icon={faArrowRight}/>
@@ -44,7 +44,7 @@ export const EvolutionSpecie : React.FC<EvolutionSpecieProps> = ({evolutions}) =
                         flexDirection: 'row',
                         alignItems: 'center',
                         width: '100%',
-                        justifyContent: 'center'
+                        justifyContent: 'space-evenly'
                     }}>
                         <div className={"evolution-method"}>
                             <FontAwesomeIcon style={{fontSize: '30px'}} icon={faArrowRight}/>

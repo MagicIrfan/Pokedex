@@ -9,7 +9,7 @@ export const EvolutionTab : React.FC<EvolutionTabProps> = ({evolutions}) => {
 
     return (
         <div className={"evolution-tab"}>
-
+            <EvolutionSpecie evolutions={evolutions}/>
         </div>
     );
 }

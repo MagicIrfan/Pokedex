@@ -208,7 +208,6 @@
 .evolution-specie{
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
@@ -221,7 +220,7 @@
 
 .pokemon-move{
     border-radius: 10px;
-    border: 2px solid var(--color);
+    border: 3px solid var(--color);
     padding: 1.5em 4em;
 }
 
