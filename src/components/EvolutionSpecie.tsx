@@ -36,7 +36,7 @@ const generateEvolutionComponents = (evolutions: PokemonEvolutionChain[]) => {
     const finalComponents : JSX.Element[] = [];
     const firstStageComponents : JSX.Element[] = [];
     const secondStageComponents : JSX.Element[] = [];
-    const generateEvolutionStageComponent = (components : JSX.Element[]) => {
+    const generateEvolutionStageComponent = (components : JSX.Element[], key:number) => {
         return (
             <div style={{
                 display: 'flex',
@@ -44,20 +44,21 @@ const generateEvolutionComponents = (evolutions: PokemonEvolutionChain[]) => {
                 alignItems: 'center',
                 width: 'inherit',
                 justifyContent: 'space-between'
-            }}>
+            }}
+            key={key}>
                 {components}
             </div>
         );
     }
-    evolutions.forEach((evolution: PokemonEvolutionChain) : void => {
-        firstStageComponents.push(<EvolutionStep evolution={evolution}/>);
-        evolution.evolvesTo.forEach((evolution2: PokemonEvolutionChain) : void => {
-            secondStageComponents.push(<EvolutionStep evolution={evolution2}/>);
+    evolutions.forEach((evolution: PokemonEvolutionChain, index:number) : void => {
+        firstStageComponents.push(<EvolutionStep key={index} evolution={evolution}/>);
+        evolution.evolvesTo.forEach((evolution2: PokemonEvolutionChain, Jindex:number) : void => {
+            secondStageComponents.push(<EvolutionStep key={Jindex} evolution={evolution2}/>);
         });
     });
-    finalComponents.push(generateEvolutionStageComponent(firstStageComponents));
+    finalComponents.push(generateEvolutionStageComponent(firstStageComponents,1));
     if(secondStageComponents.length){
-        finalComponents.push(generateEvolutionStageComponent(secondStageComponents));
+        finalComponents.push(generateEvolutionStageComponent(secondStageComponents,2));
     }
     return finalComponents;
 };

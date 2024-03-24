@@ -5,11 +5,9 @@ import {
     faChartSimple,
     faCircleInfo,
     faHand,
-    faMap,
-    faEye
+    faMap
 } from "@fortawesome/free-solid-svg-icons";
 import {ActiveTab} from "./ActiveTab";
-import DetailedPokemon from "../../models/DetailledPokemon";
 
 export const Tabs : React.FC = () => {
     const [activeTab, setActiveTab] = useState("about");

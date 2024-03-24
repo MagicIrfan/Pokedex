@@ -9,7 +9,7 @@ export const PokemonMovesTab : React.FC = () => {
     const moves : PokemonMove[] = pokemon.moves;
     const [moveElements, setMovesElements] = useState<ReactElement[]>([]);
     useEffect(() : void => {
-        const elements = moves.map((move : PokemonMove) => <PokemonMoveElement move={move}/>);
+        const elements = moves.map((move : PokemonMove, index:number) => <PokemonMoveElement move={move} key={index}/>);
         setMovesElements(elements);
     }, [moves]);
     return (
