@@ -1,16 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import {faMars, faVenus} from "@fortawesome/free-solid-svg-icons";
 import {PokemonCharacteristic} from "../PokemonCharacteristic";
 import {PokemonMeasurements} from "../PokemonMeasurements";
 import DetailedPokemon from "../../models/DetailledPokemon";
 import {prettier} from "../../utils/string";
 import PokemonAbility from "../../models/PokemonAbility";
+import {PokemonContext} from "../pages/PokemonPage";
 
-interface AboutTabProps{
-    pokemon:DetailedPokemon;
-}
-export const AboutTab : React.FC<AboutTabProps> = ({pokemon}) => {
-    return (
+export const AboutTab : React.FC = () => {
+    const pokemon : DetailedPokemon = useContext(PokemonContext);
+    return(
         <>
             <p className={"poke-description"}>
                 {prettier(pokemon.description)}

@@ -67,6 +67,8 @@ export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | 
                 pokemonMoves.push(pokemonMove);
             }
 
+            const pokemonLocationsArea : string[] = await getPokemonLocationsArea(id);
+
             detailedPokemonBuilder
                 .withId(id)
                 .withName(name)
@@ -76,7 +78,8 @@ export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | 
                 .withAbilities(pokeAbilities)
                 .withStatistics(pokeStats)
                 .withCry(pokeCry)
-                .withMoves(pokemonMoves);
+                .withMoves(pokemonMoves)
+                .withLocations(pokemonLocationsArea);
         }
 
         const responseDetailedPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
@@ -170,6 +173,20 @@ export const getPokemonCount = async (): Promise<number> => {
         console.error('Failed to fetch evolution chain:', error);
     }
     return 0;
+}
+
+export const getPokemonLocationsArea = async (id:number | string): Promise<string[]> => {
+
+    try {
+        const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`);
+        if(response){
+            return response.map((locationArea: any) => locationArea.location_area.name);
+        }
+    }
+    catch (error) {
+        console.error('Failed to fetch evolution chain:', error);
+    }
+    return [];
 }
 
 

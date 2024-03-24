@@ -1,12 +1,11 @@
-import React, {ReactElement, useEffect, useState} from "react";
+import React, {ReactElement, useContext, useEffect, useState} from "react";
 import {PokemonStatistic} from "../PokemonStatistic";
 import DetailedPokemon from "../../models/DetailledPokemon";
 import {PokemonStatistics} from "../../models/PokemonStatistics";
+import {PokemonContext} from "../pages/PokemonPage";
 
-interface StatTabProps{
-    pokemon:DetailedPokemon;
-}
-export const StatTab : React.FC<StatTabProps> = ({pokemon}) => {
+export const StatTab : React.FC = () => {
+    const pokemon : DetailedPokemon = useContext(PokemonContext);
     const [statisticsComponents, setStatisticsComponents] = useState<ReactElement[]>([]);
     useEffect(() : void => {
         const statistics : PokemonStatistics = pokemon.statistics;

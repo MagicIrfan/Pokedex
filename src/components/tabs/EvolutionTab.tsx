@@ -1,14 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {EvolutionSpecie} from "../EvolutionSpecie";
 import {PokemonEvolutionChain} from "../../models/PokemonEvolutionChain";
+import DetailedPokemon from "../../models/DetailledPokemon";
+import {PokemonContext} from "../pages/PokemonPage";
 
-interface EvolutionTabProps{
-    evolutions:PokemonEvolutionChain;
-}
-export const EvolutionTab : React.FC<EvolutionTabProps> = ({evolutions}) => {
-    useEffect(()=> {
-       console.log(evolutions);
-    });
+export const EvolutionTab : React.FC = () => {
+    const pokemon : DetailedPokemon = useContext(PokemonContext);
+    const evolutions = pokemon.evolutions
     const canEvolve : boolean = evolutions && evolutions.evolvesTo.length !== 0;
     return (
         <div className={"evolution-tab"}>

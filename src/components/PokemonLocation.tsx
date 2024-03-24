@@ -1,15 +1,14 @@
 import React from "react";
+import {prettier} from "../utils/string";
 
 interface PokemonLocationProps{
     className?:string;
-    regionName:string;
     locationName:string;
 }
-export const PokemonLocation : React.FC<PokemonLocationProps> = ({className = "", regionName, locationName}) => {
+export const PokemonLocation : React.FC<PokemonLocationProps> = ({className = "", locationName}) => {
     return (
         <div className={"pokemon-location"}>
-            <p className={className}>{regionName}</p>
-            <p>{locationName}</p>
+            <p>{prettier(locationName)}</p>
         </div>
     );
 }

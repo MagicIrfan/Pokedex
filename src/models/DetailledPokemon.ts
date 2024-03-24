@@ -24,7 +24,7 @@ export default class DetailedPokemon {
     private readonly _abilities: PokemonAbility[];
     private readonly _evolutions: PokemonEvolutionChain | undefined;
     private readonly _moves: PokemonMove[];
-    /*private readonly _location Location[]*/
+    private readonly _locations: string[];
 
     constructor(builder: DetailedPokemonBuilder) {
         this._id = builder.id;
@@ -45,6 +45,7 @@ export default class DetailedPokemon {
         this._baseHappiness = builder.baseHappiness;
         this._evolutions = builder.evolutions;
         this._moves = builder.moves;
+        this._locations = builder.locations;
     }
 
     get id(): number {
@@ -119,6 +120,10 @@ export default class DetailedPokemon {
         return this._moves;
     }
 
+    get locations() : string[] {
+        return this._locations;
+    }
+
     // La méthode de construction statique pour le Builder
     static builder(): DetailedPokemonBuilder {
         return new DetailedPokemonBuilder();
@@ -144,6 +149,7 @@ export class DetailedPokemonBuilder {
     statistics!: PokemonStatistics;
     evolutions?: PokemonEvolutionChain;
     moves: PokemonMove[] = [];
+    locations: string[] = [];
 
     withId(id: number): DetailedPokemonBuilder {
         this.id = id;
@@ -235,6 +241,10 @@ export class DetailedPokemonBuilder {
         return this;
     }
 
+    withLocations(locations:string[]) : DetailedPokemonBuilder{
+        this.locations = locations;
+        return this;
+    }
 
     build(): DetailedPokemon {
         return new DetailedPokemon(this);
