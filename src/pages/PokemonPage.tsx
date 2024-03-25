@@ -49,7 +49,6 @@ const PokemonPage : React.FC = () => {
 
     useEffect((): void => {
         (async () : Promise<void> => {
-            console.log(await getPokemonCount())
             setPokemonCount(await getPokemonCount());
         })();
     }, []);

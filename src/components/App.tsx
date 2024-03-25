@@ -4,7 +4,6 @@ import PokemonApp from "../pages/PokemonApp";
 import PokemonPage from "../pages/PokemonPage";
 const App : React.FC = () => {
 
-
     return (
         <Router>
             <Routes>

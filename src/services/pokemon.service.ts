@@ -51,23 +51,28 @@ export const getPokemonSpecie = async (url:string): Promise<PokemonSpecie | null
 export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | null> => {
     try {
         const detailedPokemonBuilder = new DetailedPokemonBuilder();
-        const responsePokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        // Démarrez les appels API en parallèle pour les informations de base et les espèces de Pokémon
+        const pokemonApiResponse = axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        const pokemonSpeciesResponse = axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
+
+        // Attendez que les deux appels initiaux soient terminés
+        const [responsePokemon, responseDetailedPokemon] = await Promise.all([pokemonApiResponse, pokemonSpeciesResponse]);
 
         if (responsePokemon.status === 200 && responsePokemon.data) {
-            const {id, name, types, abilities, stats, weight, height, cries,moves} = responsePokemon.data;
+            const {id, name, types, abilities, stats, weight, height, cries, moves} = responsePokemon.data;
 
-            const pokeTypes = types.map((apiType : any) => apiType.type.name);
-            const pokeAbilities = abilities.map((ability : any) => ({ name: ability.ability.name })); // Assurez-vous que cela correspond à la structure attendue de PokemonAbility
-            const pokeStats : PokemonStatistics = new PokemonStatistics(stats.map((stat : any) => stat.base_stat)); // Assurez-vous que le constructeur de Statistics est conçu pour cela
+            const pokeTypes = types.map((apiType: any) => apiType.type.name);
+            const pokeAbilities = abilities.map((ability: any) => ({ name: ability.ability.name }));
+            const pokeStats: PokemonStatistics = new PokemonStatistics(stats.map((stat: any) => stat.base_stat));
             const pokeCry: string = cries.latest as string;
 
-            const pokemonMoves : PokemonMove[] = [];
-            for (const move of moves) {
-                const pokemonMove : PokemonMove = await getPokemonMove(move.move.url) as PokemonMove;
-                pokemonMoves.push(pokemonMove);
-            }
+            // Exécuter en parallèle les appels pour les mouvements et les zones de localisation
+            const movesPromises = moves.map((move : any) => getPokemonMove(move.move.url));
+            const pokemonMovesPromise = Promise.all(movesPromises);
+            const pokemonLocationsAreaPromise = getPokemonLocationsArea(id);
 
-            const pokemonLocationsArea : string[] = await getPokemonLocationsArea(id);
+            // Attendez que les appels parallèles pour les mouvements et les zones de localisation soient terminés
+            const [pokemonMoves, pokemonLocationsArea] = await Promise.all([pokemonMovesPromise, pokemonLocationsAreaPromise]);
 
             detailedPokemonBuilder
                 .withId(id)
@@ -82,13 +87,11 @@ export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | 
                 .withLocations(pokemonLocationsArea);
         }
 
-        const responseDetailedPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
-
         if (responseDetailedPokemon.status === 200 && responseDetailedPokemon.data) {
-            const {base_happiness, capture_rate, flavor_text_entries, shape, egg_groups, genera,gender_rate, growth_rate,evolution_chain} = responseDetailedPokemon.data;
-            const description = flavor_text_entries.find((entry:any) => entry.language.name === "en")?.flavor_text ?? "";
-            const genus = genera.find((entry:any) => entry.language.name === "en")?.genus ?? "";
-            const pokeEggGroup = egg_groups.map((egg_group:any) => egg_group.name);
+            const {base_happiness, capture_rate, flavor_text_entries, shape, egg_groups, genera, gender_rate, growth_rate, evolution_chain} = responseDetailedPokemon.data;
+            const description = flavor_text_entries.find((entry: any) => entry.language.name === "en")?.flavor_text ?? "";
+            const genus = genera.find((entry: any) => entry.language.name === "en")?.genus ?? "";
+            const pokeEggGroup = egg_groups.map((egg_group: any) => egg_group.name);
             detailedPokemonBuilder
                 .withBaseHappiness(base_happiness)
                 .withCaptureRate(capture_rate)
@@ -97,12 +100,14 @@ export const getDetailedPokemon = async (id: number): Promise<DetailedPokemon | 
                 .withEggGroups(pokeEggGroup)
                 .withGenus(genus)
                 .withGrowthRate(growth_rate.name);
-            if(gender_rate !== -1){
-                const pokeFemaleRate : number = gender_rate / 8 * 100;
-                const pokeGenderRate : GenderRate = new GenderRate(100 - pokeFemaleRate, pokeFemaleRate)
+            if (gender_rate !== -1) {
+                const pokeFemaleRate: number = gender_rate / 8 * 100;
+                const pokeGenderRate: GenderRate = new GenderRate(100 - pokeFemaleRate, pokeFemaleRate);
                 detailedPokemonBuilder.withGenderRate(pokeGenderRate);
             }
-            await fetchEvolutionChain(evolution_chain.url,detailedPokemonBuilder);
+
+            // Si fetchEvolutionChain est indépendant, vous pourriez aussi le démarrer plus tôt et attendre ici
+            await fetchEvolutionChain(evolution_chain.url, detailedPokemonBuilder);
         }
 
         return detailedPokemonBuilder.build();
