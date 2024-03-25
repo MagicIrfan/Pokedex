@@ -17,8 +17,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
             const nbPokemon : number = await getPokemonCount();
             const promises = Array.from({ length: nbPokemon }, (_, index) => getPokemon(index + 1));
             const results = await Promise.all(promises);
-            const pokemons : Pokemon[] = results.filter(pokemon => pokemon !== null) as Pokemon[];
-            setPokemons(pokemons);
+            setPokemons(results as Pokemon[]);
         };
         fetchAllPokemons();
     }, []);
@@ -32,7 +31,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     }, [typeName, name, pokemons]);
 
     const listItems : JSX.Element[] = filteredPokemons.map((pokemon : Pokemon, index : number) => (
-        <Suspense key={pokemon.id} fallback={<div key={index}>Chargement...</div>}>
+        <Suspense key={pokemon.id} fallback={<></>}>
             <PokemonComponent pokemon={pokemon}/>
         </Suspense>
     ));

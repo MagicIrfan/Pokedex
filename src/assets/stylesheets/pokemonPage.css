@@ -6,6 +6,36 @@
         transform: scale(1.25) rotate(-30deg);
     }
 }
+
+@keyframes leftToRight {
+    from {
+        transform: translateX(-100px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes rightToLeft {
+    from {
+        transform: translateX(100px);
+        opacity:0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes upToDown {
+    from {
+        transform: translateY(-150px) ;
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
 .pokemon-wrapper{
     background-color: var(--color);
     padding-bottom: 8em;
@@ -211,6 +241,15 @@
     border-radius: 15px;
 }
 
+.stat-bar-filled{
+    width: 0;
+    transition: width 1s ease-in-out;
+}
+
+.stat-bar-filled::after{
+    width: 100%;
+}
+
 .evolution-specie{
     margin-top: 10px;
     display: flex;
@@ -275,4 +314,19 @@
     justify-content: center;
     align-items: center;
     column-gap:15px;
+}
+
+.left{
+    animation: leftToRight 0.6s;
+    animation-fill-mode: forwards;
+}
+
+.right{
+    animation: rightToLeft 0.6s;
+    animation-fill-mode: forwards;
+}
+
+.up-to-down{
+    animation: upToDown 0.6s;
+    animation-fill-mode: forwards;
 }

@@ -9,7 +9,7 @@ const PokemonApp : React.FC = () => {
 
     const [name, setName] = useState<string>("");
     const [typeName, setTypeName] = useState<string>("all");
-    const onPokemonInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onPokemonInput = (event: React.ChangeEvent<HTMLInputElement>) : void => {
         setName(event.target.value);
     };
 
