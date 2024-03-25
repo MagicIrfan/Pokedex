@@ -26,7 +26,8 @@ const PokemonPage : React.FC = () => {
             if (!isNaN(pokemonId)) {
                 try {
                     const data = await getDetailedPokemon(pokemonId);
-                    if (data) {
+                    if (data){
+                        console.log(data)
                         setPokemon(data);
                         if (data.cry) {
                             audio.current.src = data.cry;

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {faMars, faVenus} from "@fortawesome/free-solid-svg-icons";
 import {PokemonCharacteristic} from "../PokemonCharacteristic";
 import {PokemonMeasurements} from "../PokemonMeasurements";
@@ -18,7 +18,7 @@ export const AboutTab : React.FC = () => {
                 fontSize:1.2 + 'em'
             }}>
                 <PokemonMeasurements pokemon={pokemon} />
-                <PokemonCharacteristic name={"Abilities"} abilities={pokemon.abilities.map((ability : PokemonAbility )=>ability.name)} className={"poke-ability"}/>
+                <PokemonCharacteristic name={"Abilities"} abilities={pokemon.abilities} className={"poke-ability"}/>
                 {pokemon.growthRate.length !== 0 && <PokemonCharacteristic name={"Growth rate"} abilities={[pokemon.growthRate]}/>}
                 <PokemonCharacteristic name={"Capture rate"} abilities={[`${pokemon.captureRate}`]}/>
                 <PokemonCharacteristic name={"Base happiness"} abilities={[`${pokemon.baseHappiness}%`]}/>

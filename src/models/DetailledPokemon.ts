@@ -21,7 +21,7 @@ export default class DetailedPokemon {
     private readonly _genderRate?: GenderRate;
     private readonly _statistics: PokemonStatistics;
     private readonly _types: string[];
-    private readonly _abilities: PokemonAbility[];
+    private readonly _abilities: string[];
     private readonly _evolutions: PokemonEvolutionChain | undefined;
     private readonly _moves: PokemonMove[];
     private readonly _locations: string[];
@@ -64,7 +64,7 @@ export default class DetailedPokemon {
         return this._types;
     }
 
-    get abilities(): PokemonAbility[] {
+    get abilities(): string[] {
         return this._abilities;
     }
 
@@ -135,7 +135,7 @@ export class DetailedPokemonBuilder {
     name!: string;
     description!: string;
     types!: string[];
-    abilities: PokemonAbility[] = [];
+    abilities: string[] = [];
     growthRate!: string;
     cry!: string;
     shape!: string;
@@ -171,7 +171,7 @@ export class DetailedPokemonBuilder {
         return this;
     }
 
-    withAbilities(abilities: PokemonAbility[]): DetailedPokemonBuilder {
+    withAbilities(abilities: string[]): DetailedPokemonBuilder {
         this.abilities = abilities;
         return this;
     }
