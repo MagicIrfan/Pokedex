@@ -21,6 +21,35 @@ export const fetchData = async (url: string) => {
     return null;
 }
 
+export const getAllPokemons = async (): Promise<Pokemon[]> => {
+    const pokemonCount = await getPokemonCount();
+    const limit = 50; // Définir une limite pour chaque requête de pagination
+    const pages = Math.ceil(pokemonCount / limit);
+    let allPokemons : Pokemon[] = [];
+
+    for (let i = 0; i < pages; i++) {
+        const offset = i * limit;
+        const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
+        const response = await fetchData(url);
+        if (response && response.results) {
+            const pokemonsData = response.results;
+            // Paralléliser les requêtes pour les détails de chaque Pokémon
+            const pokemonsDetailsPromises = pokemonsData.map((pokemon : any) => fetchData(pokemon.url));
+            const pokemonsDetails = await Promise.all(pokemonsDetailsPromises);
+
+            const pokemons = pokemonsDetails.map((details) => {
+                if (details) {
+                    const { id, name, types } = details;
+                    return new Pokemon(id, name, types.map((apiType: any) => apiType.type.name));
+                }
+            }).filter(Boolean); // Filtrer les éventuelles valeurs nulles
+
+            allPokemons = [...allPokemons, ...pokemons] as Pokemon[];
+        }
+    }
+    return allPokemons;
+};
+
 export const getPokemon = async (id: number | string) => {
     const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
     if (response) {
@@ -89,7 +118,6 @@ export const getDetailedPokemon = async (id: number) => {
                 detailedPokemonBuilder.withGenderRate(pokeGenderRate);
             }
             await fetchEvolutionChain(evolution_chain.url, detailedPokemonBuilder);
-            // Supposons que withSpeciesDetails est une méthode ajoutée qui traite toutes les données species
         }
         return detailedPokemonBuilder.build();
     } catch (error) {
@@ -114,11 +142,13 @@ export const fetchEvolutionChain = async (url : string, detailedPokemonBuilder :
                 const buildChains = async (evolutionData: any): Promise<PokemonEvolutionChain> => {
                     const pokemonName: string = evolutionData.species.url;
                     const details: PokemonEvolutionDetail[] = evolutionData.evolution_details.map((detail: any) => new PokemonEvolutionDetail(detail.trigger.name));
-                    const pokemon : PokemonSpecie = await getPokemonSpecie(pokemonName) as PokemonSpecie;
                     const evolvesToPromises = evolutionData.evolves_to.map((evolveToData: any) => buildChains(evolveToData));
-                    const evolutionChains : PokemonEvolutionChain[] = await Promise.all(evolvesToPromises);
+                    const [pokemon, evolutionChains] = await Promise.all([
+                        getPokemonSpecie(pokemonName),
+                        Promise.all(evolvesToPromises)
+                    ]);
                     return PokemonEvolutionChain.builder()
-                        .withPokemon(pokemon)
+                        .withPokemon(pokemon as PokemonSpecie)
                         .withDetails(details)
                         .withEvolvesTo(evolutionChains)
                         .build();

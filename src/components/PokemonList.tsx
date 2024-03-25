@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, Suspense } from 'react';
-import {getPokemon, getPokemonCount} from "../services/pokemon.service";
+import {getAllPokemons, getDetailedPokemon, getPokemon, getPokemonCount} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
 
 const PokemonComponent = React.lazy(() => import('./Pokemon'));
@@ -13,13 +13,11 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
     useEffect((): void => {
-        const fetchAllPokemons = async () => {
-            const nbPokemon : number = await getPokemonCount();
-            const promises = Array.from({ length: nbPokemon }, (_, index) => getPokemon(index + 1));
-            const results = await Promise.all(promises);
+
+        (async () => {
+            const results : Pokemon[] = await getAllPokemons();
             setPokemons(results as Pokemon[]);
-        };
-        fetchAllPokemons();
+        })();
     }, []);
 
     const filteredPokemons : Pokemon[] = useMemo(() => {

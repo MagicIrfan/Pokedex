@@ -27,7 +27,6 @@ const PokemonPage : React.FC = () => {
                 try {
                     const data = await getDetailedPokemon(pokemonId);
                     if (data){
-                        console.log(data)
                         setPokemon(data);
                         if (data.cry) {
                             audio.current.src = data.cry;
