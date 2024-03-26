@@ -1,12 +1,12 @@
 import axios from "axios";
 import Pokemon from "../models/Pokemon";
-import DetailedPokemon, {DetailedPokemonBuilder} from "../models/DetailledPokemon";
-import {PokemonStatistics} from "../models/PokemonStatistics";
+import {DetailedPokemonBuilder} from "../models/DetailledPokemon";
 import GenderRate from "../models/GenderRate";
 import {PokemonEvolutionChain} from "../models/PokemonEvolutionChain";
 import {PokemonEvolutionDetail} from "../models/PokemonEvolutionDetail";
 import {PokemonMove} from "../models/PokemonMove";
 import PokemonSpecie from "../models/PokemonSpecie";
+import {PokemonStatistics} from "../models/PokemonStatistics";
 
 
 export const fetchData = async (url: string) => {
@@ -23,31 +23,18 @@ export const fetchData = async (url: string) => {
 
 export const getAllPokemons = async (): Promise<Pokemon[]> => {
     const pokemonCount = await getPokemonCount();
-    const limit = 50; // Définir une limite pour chaque requête de pagination
-    const pages = Math.ceil(pokemonCount / limit);
-    let allPokemons : Pokemon[] = [];
+    const pokemonPromises = [];
 
-    for (let i = 0; i < pages; i++) {
-        const offset = i * limit;
-        const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
-        const response = await fetchData(url);
-        if (response && response.results) {
-            const pokemonsData = response.results;
-            // Paralléliser les requêtes pour les détails de chaque Pokémon
-            const pokemonsDetailsPromises = pokemonsData.map((pokemon : any) => fetchData(pokemon.url));
-            const pokemonsDetails = await Promise.all(pokemonsDetailsPromises);
-
-            const pokemons = pokemonsDetails.map((details) => {
-                if (details) {
-                    const { id, name, types } = details;
-                    return new Pokemon(id, name, types.map((apiType: any) => apiType.type.name));
-                }
-            }).filter(Boolean); // Filtrer les éventuelles valeurs nulles
-
-            allPokemons = [...allPokemons, ...pokemons] as Pokemon[];
-        }
+    // Créer un tableau de promesses pour chaque Pokémon
+    for (let index = 1; index <= pokemonCount; index++) {
+        pokemonPromises.push(getPokemon(index));
     }
-    return allPokemons;
+
+    // Attendre que toutes les promesses soient résolues
+    const allPokemonsResults = await Promise.all(pokemonPromises);
+
+    // Filtrer les résultats nuls et retourner les Pokémons
+    return allPokemonsResults.filter((pokemon): pokemon is Pokemon => pokemon !== null);
 };
 
 export const getPokemon = async (id: number | string) => {
@@ -86,6 +73,8 @@ export const getDetailedPokemon = async (id: number) => {
                 getPokemonLocationsArea(id)
             ]);
 
+
+
             detailedPokemonBuilder
                 .withId(id)
                 .withName(name)
@@ -93,7 +82,7 @@ export const getDetailedPokemon = async (id: number) => {
                 .withHeight(height)
                 .withTypes(types.map((apiType: { type: { name: any; }; }) => apiType.type.name))
                 .withAbilities(abilities.map((ability: { ability: { name: any; }; }) => ability.ability.name))
-                .withStatistics(stats.map((stat: { base_stat: any; }) => stat.base_stat))
+                .withStatistics(new PokemonStatistics(stats.map((stat: { base_stat: any; }) => stat.base_stat)))
                 .withCry(cries.latest)
                 .withMoves(pokemonMoves)
                 .withLocations(pokemonLocationsArea);
