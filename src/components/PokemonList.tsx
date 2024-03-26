@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, Suspense } from 'react';
 import {getAllPokemons} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
+import {useQuery} from "react-query";
 
 const PokemonComponent = React.lazy(() => import('./Pokemon'));
 
@@ -10,34 +11,20 @@ interface PokemonListProps {
 }
 
 const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const { data: pokemons, isLoading, error } = useQuery<Pokemon[]>('pokemons', getAllPokemons, {
+        initialData: [],
+    });
 
-    useEffect((): void => {
-        (async () => {
-            const cachedPokemons = localStorage.getItem('pokemons');
-            if (cachedPokemons) {
-                const pokemonsAsync : Pokemon[] = await new Promise<Pokemon[]>((resolve) => {
-                    resolve(JSON.parse(cachedPokemons));
-                });
-                setPokemons(pokemonsAsync);
-            } else {
-                const results: Pokemon[] = await getAllPokemons();
-                setPokemons(results);
-                localStorage.setItem('pokemons', JSON.stringify(results));
-            }
-        })();
-    }, []);
-
+    // Filtre les pokemons. Si pokemons est undefined, utilise defaultValue pour éviter les erreurs
     const filteredPokemons : Pokemon[] = useMemo(() => {
-        return pokemons && pokemons.filter((pokemon : Pokemon) =>
-            pokemon.name && pokemon.name.includes(name) &&
-            (typeName !== "all"
-                ? pokemon.types.some((typeInfo : string) : boolean => typeInfo.toLowerCase() === typeName.toLowerCase())
-                : true))
-    }, [typeName, name, pokemons]);
+        return (pokemons || []).filter((pokemon : Pokemon) =>
+            pokemon.name.includes(name) &&
+            (typeName !== "all" ? pokemon.types.some((typeInfo : string) : boolean => typeInfo.toLowerCase() === typeName.toLowerCase()) : true)
+        );
+    }, [pokemons, name, typeName]);
 
-    const listItems : JSX.Element[] = filteredPokemons && filteredPokemons.map((pokemon : Pokemon, index : number) => (
-        <Suspense key={pokemon.id} fallback={<></>}>
+    const listItems = filteredPokemons.map((pokemon: Pokemon) => (
+        <Suspense key={pokemon.id} fallback={<div>Loading...</div>}>
             <PokemonComponent pokemon={pokemon}/>
         </Suspense>
     ));
