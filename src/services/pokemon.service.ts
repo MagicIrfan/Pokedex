@@ -59,7 +59,6 @@ export const getDetailedPokemon = async (id: number) => {
     try {
         const detailedPokemonBuilder = new DetailedPokemonBuilder();
 
-        // Démarrez les appels API en parallèle pour les informations de base et les espèces de Pokémon
         const [responsePokemon, responseDetailedPokemon] = await Promise.all([
             fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`),
             fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
@@ -72,8 +71,6 @@ export const getDetailedPokemon = async (id: number) => {
                 Promise.all(moves.map((move: { move: { url: string; }; }) => getPokemonMove(move.move.url))),
                 getPokemonLocationsArea(id)
             ]);
-
-
 
             detailedPokemonBuilder
                 .withId(id)

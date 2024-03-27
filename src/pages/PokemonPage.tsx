@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, createContext, useState} from 'react';
+import React, {useEffect, useRef, createContext} from 'react';
 import '../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
@@ -10,48 +10,36 @@ import {ImageContainer} from "../components/ImageContainer";
 import {PokemonTypes} from "../components/PokemonTypes";
 import DetailedPokemon from "../models/DetailledPokemon";
 import {getDetailedPokemon, getPokemonCount} from "../services/pokemon.service";
+import {useQuery} from "react-query";
 export const PokemonContext = createContext<DetailedPokemon | null>(null) as React.Context<DetailedPokemon>;
 const PokemonPage : React.FC = () => {
     const {id} = useParams();
     const pokemonId : number = Number(id);
-    const [pokemon, setPokemon] = useState<DetailedPokemon>();
-    const [pokemonCount, setPokemonCount] = useState<number>(0);
     const audio = useRef(new Audio());
     const navigate : NavigateFunction = useNavigate();
     const previousId : number = pokemonId - 1;
     const nextId : number = pokemonId + 1;
 
-    useEffect((): () => void => {
-        const currentAudio : HTMLAudioElement = audio.current;
-        (async () => {
-            if (!isNaN(pokemonId)) {
-                try {
-                    const data = await getDetailedPokemon(pokemonId);
-                    if (data) {
-                        setPokemon(data);
-                        if (data.cry) {
-                            currentAudio.src = data.cry; // Utilisez la variable au lieu de la référence directe
-                        }
-                    }
-                } catch (error) {
-                    console.error('Failed to fetch Pokemon:', error);
-                }
-            } else {
-                console.warn('Invalid Pokémon ID');
-            }
-        })();
+    const { data: pokemon} = useQuery(
+        `pokemon/${pokemonId}`,
+        () => getDetailedPokemon(pokemonId),
+        {
+            keepPreviousData: true
+        }
+    );
+    const { data: pokemonCount} = useQuery('pokemonCount', getPokemonCount);
 
-        return () => {
+    useEffect(() => {
+        const currentAudio = audio.current;
+        if (pokemon?.cry) {
+            currentAudio.src = pokemon.cry;
+        }
+
+        return () : void => {
             currentAudio.pause();
             currentAudio.src = "";
         };
-    }, [pokemonId]);
-
-    useEffect((): void => {
-        (async () : Promise<void> => {
-            setPokemonCount(await getPokemonCount());
-        })();
-    }, []);
+    }, [pokemon?.cry]);
 
     const playPokemonCry = async () : Promise<void> => {
         await audio.current.play();
@@ -96,7 +84,7 @@ const PokemonPage : React.FC = () => {
                                     <ImageContainer image={<Image
                                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
                                         width={275} height={275} alt="pokemon"/>} className={"pokemon-main-image-circle"} onClick={() => changePokemon(previousId)}/>
-                                    {nextId <= pokemonCount &&
+                                    {nextId <= (pokemonCount || 1) &&
                                         <ImageContainer image={<Image className={"image-poke-hidden"}
                                                                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${nextId}.png`}
                                                                       width={175} height={175}
