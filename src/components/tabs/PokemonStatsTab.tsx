@@ -1,22 +1,18 @@
-import React, {ReactElement, useContext, useEffect, useState} from "react";
-import {PokemonStatistic} from "../PokemonStatistic";
-import DetailedPokemon from "../../models/DetailledPokemon";
-import {PokemonStatistics} from "../../models/PokemonStatistics";
+import React, { useContext } from 'react';
+import { PokemonStatistics } from '../../models/PokemonStatistics';
+import DetailedPokemon from '../../models/DetailledPokemon';
 import {PokemonContext} from "../../pages/PokemonPage";
+import {PokemonStatistic} from "../PokemonStatistic";
 
-export const PokemonStatsTab : React.FC = () => {
-    const pokemon : DetailedPokemon = useContext(PokemonContext);
-    const [statisticsComponents, setStatisticsComponents] = useState<ReactElement[]>([]);
-    useEffect(() : void => {
-        const statistics : PokemonStatistics = pokemon.statistics;
-        const newStatisticsComponents: ReactElement[] = Object.values(statistics).map((stat) => (
-            <PokemonStatistic key={stat.name} statisticName={stat.name} statisticValue={stat.value} />
-        ));
-        setStatisticsComponents(newStatisticsComponents);
-    }, [pokemon.statistics]);
+export const PokemonStatsTab: React.FC = () => {
+    const pokemon: DetailedPokemon = useContext(PokemonContext);
+    const statistics: PokemonStatistics = pokemon.statistics;
+
     return (
         <div className={"poke-stats"}>
-            {statisticsComponents}
+            {Object.values(statistics).map((stat) => (
+                <PokemonStatistic key={stat.name} statisticName={stat.name} statisticValue={stat.value} />
+            ))}
         </div>
     );
-}
+};

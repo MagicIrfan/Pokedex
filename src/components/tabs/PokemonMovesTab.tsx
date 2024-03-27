@@ -1,20 +1,16 @@
-import React, {ReactElement, useContext, useEffect, useState} from "react";
-import {PokemonMove} from "../../models/PokemonMove";
-import {PokemonMove as PokemonMoveElement} from "../PokemonMove";
-import DetailedPokemon from "../../models/DetailledPokemon";
-import {PokemonContext} from "../../pages/PokemonPage";
+import React, { useContext } from 'react';
+import { PokemonContext } from './path/to/PokemonContext'; // Assurez-vous d'importer correctement PokemonContext
+import PokemonMoveElement from './path/to/PokemonMoveElement'; // Assurez-vous d'importer correctement PokemonMoveElement
 
-export const PokemonMovesTab : React.FC = () => {
-    const pokemon : DetailedPokemon = useContext(PokemonContext);
-    const moves : PokemonMove[] = pokemon.moves;
-    const [moveElements, setMovesElements] = useState<ReactElement[]>([]);
-    useEffect(() : void => {
-        const elements = moves.map((move : PokemonMove, index:number) => <PokemonMoveElement move={move} key={index}/>);
-        setMovesElements(elements);
-    }, [moves]);
+export const PokemonMovesTab: React.FC = () => {
+    const pokemon: DetailedPokemon = useContext(PokemonContext);
+    const moves: PokemonMove[] = pokemon.moves;
+
     return (
         <div className={"pokemon-moves"}>
-            {moveElements}
+            {moves.map((move: PokemonMove, index: number) => (
+                <PokemonMoveElement move={move} key={index} />
+            ))}
         </div>
     );
-}
+};
