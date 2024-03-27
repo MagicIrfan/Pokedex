@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, createContext, useContext, useState} from 'react';
+import React, {useEffect, useRef, createContext, useState} from 'react';
 import '../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
