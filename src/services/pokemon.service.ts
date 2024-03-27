@@ -22,18 +22,12 @@ export const fetchData = async (url: string) => {
 }
 
 export const getAllPokemons = async (): Promise<Pokemon[]> => {
-    const pokemonCount = await getPokemonCount();
+    const pokemonCount : number = await getPokemonCount();
     const pokemonPromises = [];
-
-    // Créer un tableau de promesses pour chaque Pokémon
     for (let index = 1; index <= pokemonCount; index++) {
         pokemonPromises.push(getPokemon(index));
     }
-
-    // Attendre que toutes les promesses soient résolues
     const allPokemonsResults = await Promise.all(pokemonPromises);
-
-    // Filtrer les résultats nuls et retourner les Pokémons
     return allPokemonsResults.filter((pokemon): pokemon is Pokemon => pokemon !== null);
 };
 

@@ -21,7 +21,7 @@ const PokemonPage : React.FC = () => {
     const nextId : number = pokemonId + 1;
 
     const { data: pokemon} = useQuery(
-        `pokemon/${pokemonId}`,
+        ["pokemon",pokemonId],
         () => getDetailedPokemon(pokemonId),
         {
             keepPreviousData: true
