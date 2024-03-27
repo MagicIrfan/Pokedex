@@ -1,57 +1,40 @@
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import React from 'react';
 import {getTypes} from "../services/pokemonType.service";
+import {useQuery} from "react-query";
 
 interface PokemonTypeProps {
-    setTypeName: Dispatch<SetStateAction<string>>;
+    setTypeName: React.Dispatch<React.SetStateAction<string>>;
 }
-export const PokemonTypeList : React.FC<PokemonTypeProps> = ({setTypeName}) => {
 
-    const [types, setTypes] = useState<Array<{ type: string, isSelected: boolean }>>([])
+export const PokemonTypeList: React.FC<PokemonTypeProps> = ({ setTypeName }) => {
+    const [selectedType, setSelectedType] = React.useState<string>('all');
+
+    const { data: types } = useQuery('pokemonTypes', getTypes, {
+        select: (data: string[]) => ['all', ...data]
+    });
 
     const onClickType = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const typeName = event.currentTarget.value;
-
-        // Create a new array with updated isSelected property
-        const updatedTypes = types.map(item => ({
-            type: item.type,
-            isSelected: item.type === typeName
-        }));
-
+        const typeName: string = event.currentTarget.value;
+        setSelectedType(typeName)
         setTypeName(typeName);
-        setTypes(updatedTypes);
-    }
+    };
 
-    useEffect(() => {
-        const fetchPokemonTypes = async () => {
-            const fetchTypes : string[] = await getTypes();
-            const all : string = "all";
-            const temp : { type: string, isSelected: boolean }[] = [{type:all, isSelected:true}];
-            temp.push(...fetchTypes.map((type: string) => ({
-                type,
-                isSelected: false
-            })));
-            setTypes(temp);
-        }
-        fetchPokemonTypes();
-    }, []);
-
-    const listItems = types.map(type => (
-        <button
-            onClick={onClickType}
-            key={type.type}
-            value={type.type}
-            className={`type-button ${type.type} ${type.isSelected ? 'selected' : ''}`}
-        >
-            {type.type.toUpperCase()}
-        </button>
-    ));
     return (
-        <div className={"types"}>
+        <div className="types">
             <h1>Choose a type</h1>
-            <div className={"type-list"}>
-                {listItems}
+            <div className="type-list">
+                {types?.map((type : string) => (
+                    <button
+                        onClick={onClickType}
+                        key={type}
+                        value={type}
+                        className={`type-button ${type} ${type === selectedType ? 'selected' : ''}`}
+                    >
+                        {type.toUpperCase()}
+                    </button>
+                ))}
             </div>
         </div>
     );
-}
+};

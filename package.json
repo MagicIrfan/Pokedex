@@ -33,8 +33,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-      "lint": "eslint src/**/*.{js,ts,tsx} --fix"
-
+    "lint": "eslint src/**/*.{js,ts,tsx} --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -55,7 +54,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-lazy-load-image-component": "^1.6.3",
+    "eslint-plugin-react": "^7.34.1",
     "gh-pages": "^6.1.1"
   }
 }

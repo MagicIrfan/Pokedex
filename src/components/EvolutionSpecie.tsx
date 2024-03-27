@@ -26,7 +26,6 @@ const EvolutionStep: React.FC<EvolutionStepProps> = ({ evolution }) => (
     </div>
 );
 
-// Définition de l'interface pour les props de EvolutionSpecie
 interface EvolutionSpecieProps {
     evolutions : PokemonEvolutionChain;
 }

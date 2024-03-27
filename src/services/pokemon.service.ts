@@ -115,9 +115,8 @@ export const getDetailedPokemon = async (id: number) => {
     }
 };
 
-// Supposons que getPokemonMove est déjà optimisé pour utiliser fetchData
 
-export const getPokemonCount = async () => {
+export const getPokemonCount = async () : Promise<number> => {
     const response = await fetchData("https://pokeapi.co/api/v2/pokemon-species/?limit=0");
     return response ? response.count : 0;
 }
@@ -150,10 +149,8 @@ export const fetchEvolutionChain = async (url : string, detailedPokemonBuilder :
     }
 };
 
-
-// @ts-ignore
 export const getPokemonMove = async (url: string): Promise<PokemonMove | null> => {
-    const data = await fetchData(url); // Utilise fetchData pour l'appel API
+    const data = await fetchData(url);
     if (data) {
         const {accuracy, power, pp, priority, name, target, type, effect_entries, damage_class} = data;
         const effect: string = effect_entries.find((effect_entry: any) => effect_entry.language.name === "en")?.effect ?? "";
