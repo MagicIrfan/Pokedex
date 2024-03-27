@@ -9,11 +9,14 @@ export const PokemonLocationsTab : React.FC = () => {
     const locations : string[] = pokemon.locations;
 
     const LocationsList = () => (
-        <>
+        <div style={{
+            overflowY:'scroll',
+            maxHeight:'500px'
+        }}>
             {locations.map((locationName : string, index : number) => (
                 <PokemonLocation key={index} locationName={locationName} />
             ))}
-        </>
+        </div>
     );
 
     return (
