@@ -1,4 +1,3 @@
-import PokemonAbility from "./PokemonAbility";
 import GenderRate from "./GenderRate";
 import {PokemonStatistics} from "./PokemonStatistics";
 import {PokemonEvolutionChain} from "./PokemonEvolutionChain";

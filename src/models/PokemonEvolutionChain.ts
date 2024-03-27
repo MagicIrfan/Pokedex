@@ -1,5 +1,4 @@
 import {PokemonEvolutionDetail} from "./PokemonEvolutionDetail";
-import Pokemon from "./Pokemon";
 import PokemonSpecie from "./PokemonSpecie";
 
 export class PokemonEvolutionChain {

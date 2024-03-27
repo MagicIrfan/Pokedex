@@ -22,14 +22,15 @@ const PokemonPage : React.FC = () => {
     const nextId : number = pokemonId + 1;
 
     useEffect((): () => void => {
+        const currentAudio : HTMLAudioElement = audio.current;
         (async () => {
             if (!isNaN(pokemonId)) {
                 try {
                     const data = await getDetailedPokemon(pokemonId);
-                    if (data){
+                    if (data) {
                         setPokemon(data);
                         if (data.cry) {
-                            audio.current.src = data.cry;
+                            currentAudio.src = data.cry; // Utilisez la variable au lieu de la référence directe
                         }
                     }
                 } catch (error) {
@@ -40,9 +41,9 @@ const PokemonPage : React.FC = () => {
             }
         })();
 
-        return () : void => {
-            audio.current.pause();
-            audio.current.src = "";
+        return () => {
+            currentAudio.pause();
+            currentAudio.src = "";
         };
     }, [pokemonId]);
 

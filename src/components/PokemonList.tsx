@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, Suspense } from 'react';
+import React, { useMemo, Suspense } from 'react';
 import {getAllPokemons} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
 import {useQuery} from "react-query";
@@ -11,7 +11,7 @@ interface PokemonListProps {
 }
 
 const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
-    const { data: pokemons, isLoading, error } = useQuery<Pokemon[]>('pokemons', getAllPokemons, {
+    const { data: pokemons} = useQuery<Pokemon[]>('pokemons', getAllPokemons, {
         initialData: [],
     });
 

@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {PokemonEvolutionChain} from "../models/PokemonEvolutionChain";
 import {Image} from "./Image";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
