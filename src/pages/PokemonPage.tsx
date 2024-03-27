@@ -3,7 +3,7 @@ import '../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {pokenumber, prettier} from "../utils/string";
+import {pokeNumber, prettier} from "../utils/string";
 import {Tabs} from "../components/tabs/Tabs";
 import {Image} from "../components/Image";
 import {ImageContainer} from "../components/ImageContainer";
@@ -68,7 +68,7 @@ const PokemonPage : React.FC = () => {
                                 <div className={"right"}>
                                     <h1 style={{
                                         fontSize:'45px'
-                                    }}>{pokenumber(pokemonId)}</h1>
+                                    }}>{pokeNumber(pokemonId)}</h1>
                                     <h2>{prettier(pokemon.genus)}</h2>
                                     <h2>{prettier(pokemon.shape)}</h2>
                                 </div>

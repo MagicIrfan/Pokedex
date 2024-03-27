@@ -1,6 +1,6 @@
 import React from 'react';
 import pokeball from "../assets/images/pokeball.png"
-import {capitalize, pokenumber} from "../utils/string";
+import {capitalize, pokeNumber} from "../utils/string";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {PokemonTypes} from "./PokemonTypes";
 import {Image} from "./Image";
@@ -19,7 +19,7 @@ const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
 
     return (
         <div className={"pokemon " + (types[0])} onClick={() => onClickPokemon(id)}>
-            <p className="poke-number">{pokenumber(id)}</p>
+            <p className="poke-number">{pokeNumber(id)}</p>
             <h2>{capitalize(name)}</h2>
             <div className="poke-body">
                 <PokemonTypes types={types}/>
