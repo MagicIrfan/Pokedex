@@ -4,7 +4,7 @@ import DetailedPokemon from "../../models/DetailledPokemon";
 import {PokemonStatistics} from "../../models/PokemonStatistics";
 import {PokemonContext} from "../../pages/PokemonPage";
 
-export const StatTab : React.FC = () => {
+export const PokemonStatsTab : React.FC = () => {
     const pokemon : DetailedPokemon = useContext(PokemonContext);
     const [statisticsComponents, setStatisticsComponents] = useState<ReactElement[]>([]);
     useEffect(() : void => {

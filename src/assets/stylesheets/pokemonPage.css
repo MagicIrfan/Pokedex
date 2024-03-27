@@ -36,6 +36,15 @@
     }
 }
 
+@keyframes fillAnimation {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 .pokemon-wrapper{
     background-color: var(--color);
     transition: background-color 1s ease-in-out;

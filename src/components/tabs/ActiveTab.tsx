@@ -1,7 +1,7 @@
 import React from "react";
 import {AboutTab} from "./AboutTab";
-import {StatTab} from "./StatTab";
-import {EvolutionTab} from "./EvolutionTab";
+import {PokemonStatsTab} from "./PokemonStatsTab";
+import {PokemonEvolutionsTab} from "./PokemonEvolutionsTab";
 import {PokemonMovesTab} from "./PokemonMovesTab";
 import {PokemonLocationsTab} from "./PokemonLocationsTab";
 
@@ -19,8 +19,8 @@ export const ActiveTab : React.FC<ActiveTabProps> = ({activeTab}) => {
     return (
         <>
             {tabIsActive("about") && <AboutTab/>}
-            {tabIsActive("stats") && <StatTab/>}
-            {tabIsActive("evolution") && <EvolutionTab/>}
+            {tabIsActive("stats") && <PokemonStatsTab/>}
+            {tabIsActive("evolution") && <PokemonEvolutionsTab/>}
             {tabIsActive("moves") && <PokemonMovesTab/>}
             {tabIsActive("location") && <PokemonLocationsTab/>}
         </>
