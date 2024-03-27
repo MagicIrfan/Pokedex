@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useMemo, useRef, useState, createContext} from 'react';
+import React, {useEffect, useRef, createContext, useContext, useState} from 'react';
 import '../assets/stylesheets/pokemonPage.css';
 import {faVolumeHigh, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {NavigateFunction, useNavigate, useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {capitalize, pokenumber, prettier} from "../utils/string";
+import {pokenumber, prettier} from "../utils/string";
 import {Tabs} from "../components/tabs/Tabs";
 import {Image} from "../components/Image";
 import {ImageContainer} from "../components/ImageContainer";
@@ -43,7 +43,6 @@ const PokemonPage : React.FC = () => {
         return () : void => {
             audio.current.pause();
             audio.current.src = "";
-            //setPokemon(undefined);
         };
     }, [pokemonId]);
 
