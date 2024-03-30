@@ -3,7 +3,7 @@ import {getAllPokemons} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
 import {useQuery} from "react-query";
 
-const PokemonComponent = React.lazy(() => import('./Pokemon'));
+const PokemonCard = React.lazy(() => import('./PokemonCard'));
 
 interface PokemonListProps {
     name: string;
@@ -25,7 +25,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
 
     const listItems = filteredPokemons.map((pokemon: Pokemon) => (
         <Suspense key={pokemon.id} fallback={<div>Loading...</div>}>
-            <PokemonComponent pokemon={pokemon}/>
+            <PokemonCard pokemon={pokemon}/>
         </Suspense>
     ));
 

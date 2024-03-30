@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {PokemonMoveCharacteristic} from "./PokemonMoveCharacteristic";
 import {PokemonMoveTypeSVG} from "./PokemonMoveTypeSVG";
 import {PokemonMove as PokemonMoveModel} from "../models/PokemonMove";
@@ -18,7 +18,8 @@ export const PokemonMove : React.FC<PokemonMoveProps> = ({move}) => {
         status:status
     }
     return (
-        <div className={`pokemon-move ${move.pokemonType}`}>
+        <div
+             className={`pokemon-move ${move.pokemonType}`}>
             <h2 className={"pokemon-move-name"}>{prettier(move.name)}</h2>
             <p style={
                 {

@@ -340,3 +340,7 @@
     animation: upToDown 0.6s;
     animation-fill-mode: forwards;
 }
+
+.text-animation{
+    animation: fadein 1s;
+}

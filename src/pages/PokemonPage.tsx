@@ -83,7 +83,7 @@ const PokemonPage : React.FC = () => {
                                     }
                                     <ImageContainer image={<Image
                                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                                        width={275} height={275} alt="pokemon"/>} className={"pokemon-main-image-circle"} onClick={() => changePokemon(previousId)}/>
+                                        width={275} height={275} alt="pokemon" className={"pokemon-image"}/>} className={"pokemon-main-image-circle"} onClick={() => changePokemon(previousId)}/>
                                     {nextId <= (pokemonCount || 1) &&
                                         <ImageContainer image={<Image className={"image-poke-hidden"}
                                                                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${nextId}.png`}
