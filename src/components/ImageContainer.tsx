@@ -7,10 +7,8 @@ interface ImageContainerProps{
 }
 export const ImageContainer : React.FC<ImageContainerProps> = ({className = "", image, onClick = () => {}}) => {
     return (
-        <>
-            <div className={className} onClick={onClick}>
-                {image}
-            </div>
-        </>
+        <div className={className} onClick={onClick}>
+            {image}
+        </div>
     );
 }

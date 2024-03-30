@@ -150,97 +150,97 @@ export class DetailedPokemonBuilder {
     moves: PokemonMove[] = [];
     locations: string[] = [];
 
-    withId(id: number): DetailedPokemonBuilder {
+    withId(id: number): this {
         this.id = id;
         return this;
     }
 
-    withName(name: string): DetailedPokemonBuilder {
+    withName(name: string): this {
         this.name = name;
         return this;
     }
 
-    withDescription(description: string): DetailedPokemonBuilder {
+    withDescription(description: string): this {
         this.description = description;
         return this;
     }
 
-    withTypes(types: string[]): DetailedPokemonBuilder {
+    withTypes(types: string[]): this {
         this.types = types;
         return this;
     }
 
-    withAbilities(abilities: string[]): DetailedPokemonBuilder {
+    withAbilities(abilities: string[]): this {
         this.abilities = abilities;
         return this;
     }
 
-    withGrowthRate(growthRate: string): DetailedPokemonBuilder {
+    withGrowthRate(growthRate: string): this {
         this.growthRate = growthRate;
         return this;
     }
 
-    withCry(cry: string): DetailedPokemonBuilder {
+    withCry(cry: string): this {
         this.cry = cry;
         return this;
     }
 
-    withShape(shape: string): DetailedPokemonBuilder {
+    withShape(shape: string): this {
         this.shape = shape;
         return this;
     }
 
-    withGenus(genus: string): DetailedPokemonBuilder {
+    withGenus(genus: string): this {
         this.genus = genus;
         return this;
     }
 
-    withEggGroups(eggGroups: string[]): DetailedPokemonBuilder {
+    withEggGroups(eggGroups: string[]): this {
         this.eggGroups = eggGroups;
         return this;
     }
 
-    withGenderRate(genderRate: GenderRate): DetailedPokemonBuilder {
+    withGenderRate(genderRate: GenderRate): this {
         this.genderRate = genderRate;
         return this;
     }
 
-    withStatistics(statistics: PokemonStatistics): DetailedPokemonBuilder {
+    withStatistics(statistics: PokemonStatistics): this {
         this.statistics = statistics;
         return this;
     }
 
-    withWeight(weight: number): DetailedPokemonBuilder {
+    withWeight(weight: number): this {
         this.weight = weight;
         return this;
     }
 
-    withHeight(height: number): DetailedPokemonBuilder {
+    withHeight(height: number): this {
         this.height = height;
         return this;
     }
 
-    withBaseHappiness(baseHappiness: number): DetailedPokemonBuilder {
+    withBaseHappiness(baseHappiness: number): this {
         this.baseHappiness = baseHappiness;
         return this;
     }
 
-    withCaptureRate(captureRate: number): DetailedPokemonBuilder {
+    withCaptureRate(captureRate: number): this {
         this.captureRate = captureRate;
         return this;
     }
 
-    withEvolutions(evolutions:PokemonEvolutionChain) : DetailedPokemonBuilder{
+    withEvolutions(evolutions:PokemonEvolutionChain) : this{
         this.evolutions = evolutions;
         return this;
     }
 
-    withMoves(moves:PokemonMove[]) : DetailedPokemonBuilder{
+    withMoves(moves:PokemonMove[]) : this{
         this.moves = moves;
         return this;
     }
 
-    withLocations(locations:string[]) : DetailedPokemonBuilder{
+    withLocations(locations:string[]) : this{
         this.locations = locations;
         return this;
     }
