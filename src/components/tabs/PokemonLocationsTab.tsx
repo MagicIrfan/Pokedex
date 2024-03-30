@@ -15,7 +15,7 @@ export const PokemonLocationsTab: React.FC = () => {
                 maxHeight: '500px'
             }}>
                 {locations.map((locationName: string, index: number) => (
-                    <PokemonLocation key={index} locationName={locationName} />
+                    <PokemonLocation key={locationName} locationName={locationName} />
                 ))}
             </div>
         ) : (

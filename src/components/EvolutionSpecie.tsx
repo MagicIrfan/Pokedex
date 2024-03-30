@@ -49,10 +49,10 @@ const generateEvolutionComponents = (evolutions: PokemonEvolutionChain[]) => {
             </div>
         );
     }
-    evolutions.forEach((evolution: PokemonEvolutionChain, index:number) : void => {
-        firstStageComponents.push(<EvolutionStep key={index} evolution={evolution}/>);
-        evolution.evolvesTo.forEach((evolution2: PokemonEvolutionChain, Jindex:number) : void => {
-            secondStageComponents.push(<EvolutionStep key={Jindex} evolution={evolution2}/>);
+    evolutions.forEach((evolution: PokemonEvolutionChain) : void => {
+        firstStageComponents.push(<EvolutionStep key={evolution.pokemon.id} evolution={evolution}/>);
+        evolution.evolvesTo.forEach((evolution2: PokemonEvolutionChain) : void => {
+            secondStageComponents.push(<EvolutionStep key={evolution.pokemon.id} evolution={evolution2}/>);
         });
     });
     finalComponents.push(generateEvolutionStageComponent(firstStageComponents,1));

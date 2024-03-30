@@ -112,28 +112,30 @@ export const getPokemonCount = async () : Promise<number> => {
     return response ? response.count : 0;
 }
 
-export const fetchEvolutionChain = async (url : string, detailedPokemonBuilder : DetailedPokemonBuilder): Promise<any> => {
+export const fetchEvolutionChain = async (url: string, detailedPokemonBuilder: DetailedPokemonBuilder): Promise<void> => {
     try {
         const response = await fetchData(url);
-        if (response && response.chain) {
-            const { chain } = response;
-            if (chain && chain.evolves_to.length) {
-                const buildChains = async (evolutionData: any): Promise<PokemonEvolutionChain> => {
-                    const pokemonName: string = evolutionData.species.url;
-                    const details: PokemonEvolutionDetail[] = evolutionData.evolution_details.map((detail: any) => new PokemonEvolutionDetail(detail.trigger.name));
-                    const evolvesToPromises = evolutionData.evolves_to.map((evolveToData: any) => buildChains(evolveToData));
-                    const [pokemon, evolutionChains] = await Promise.all([
-                        getPokemonSpecie(pokemonName),
-                        Promise.all(evolvesToPromises)
-                    ]);
-                    return PokemonEvolutionChain.builder()
-                        .withPokemon(pokemon as PokemonSpecie)
-                        .withDetails(details)
-                        .withEvolvesTo(evolutionChains)
-                        .build();
-                }
-                detailedPokemonBuilder.withEvolutions(await buildChains(chain));
+        const chain = response?.chain;
+
+        if (chain?.evolves_to.length) {
+            const buildChains = async (evolutionData: any): Promise<PokemonEvolutionChain> => {
+                const pokemonName: string = evolutionData.species.url;
+                const details: PokemonEvolutionDetail[] = evolutionData.evolution_details.map((detail: any) => new PokemonEvolutionDetail(detail.trigger.name));
+
+                const evolvesToPromises = evolutionData.evolves_to.map((evolveToData: any) => buildChains(evolveToData));
+
+                const [pokemon, evolutionChains] = await Promise.all([
+                    getPokemonSpecie(pokemonName),
+                    Promise.all(evolvesToPromises)
+                ]);
+
+                return PokemonEvolutionChain.builder()
+                    .withPokemon(pokemon as PokemonSpecie)
+                    .withDetails(details)
+                    .withEvolvesTo(evolutionChains)
+                    .build();
             }
+            detailedPokemonBuilder.withEvolutions(await buildChains(chain));
         }
     } catch (error) {
         console.error('Failed to fetch evolution chain:', error);
@@ -145,7 +147,17 @@ export const getPokemonMove = async (url: string): Promise<PokemonMove | null> =
     if (data) {
         const {accuracy, power, pp, priority, name, target, type, effect_entries, damage_class} = data;
         const effect: string = effect_entries.find((effect_entry: any) : boolean => effect_entry.language.name === "en")?.effect ?? "";
-        return new PokemonMove(name, effect, power, accuracy, pp, priority, damage_class.name, type.name, target.name);
+        return PokemonMove.builder()
+            .setName(name)
+            .setDescription(effect)
+            .setPower(power)
+            .setAccuracy(accuracy)
+            .setPp(pp)
+            .setPriority(priority)
+            .setMoveType(damage_class.name)
+            .setPokemonType(type.name)
+            .setTarget(target.name)
+            .build();
     }
     return null;
 };

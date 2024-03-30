@@ -25,7 +25,7 @@ export const PokemonCharacteristic : React.FC<PokemonCharacteristicProps> = ({na
         <div className={"poke-characteristic"}>
             <p className={"poke-characteristic-name"}>{name}</p>
             {abilities.map((ability : string, index : number) =>
-                <p key={index} className={className}>{icons && icons[index]? <FontAwesomeIcon icon={icons[index]} style={getStyleForIcon(icons[index])}/> : <></>} {prettier(ability)}</p>
+                <p key={ability} className={className}>{icons && icons[index]? <FontAwesomeIcon icon={icons[index]} style={getStyleForIcon(icons[index])}/> : <></>} {prettier(ability)}</p>
             )}
         </div>
     )

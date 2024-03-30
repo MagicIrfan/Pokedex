@@ -61,18 +61,6 @@
     overflow-x: scroll;
 }
 
-.type-button{
-    min-width: 6em;
-    max-width: 6em;
-    height: 3em;
-    background: white;
-    border-radius: 20px;
-    transition-timing-function: ease;
-    transition-duration: 0.7s;
-    scroll-snap-align: start;
-    animation: fadein 1s;
-}
-
 .poke-number{
     text-align: end;
     margin-right: 2px;
@@ -113,17 +101,20 @@
     width: 50%;
 }
 
-.pokeball-img{
-    position: absolute;
-    top: 120px;
-    right: -30px;
-}
-
 /* Apply the defined styles to each type button */
 .type-button {
     border: 2px solid var(--color);
     color: var(--color);
     box-shadow: 3px 5px var(--color);
+    min-width: 6em;
+    max-width: 6em;
+    height: 3em;
+    background: white;
+    border-radius: 20px;
+    transition-timing-function: ease;
+    transition-duration: 0.7s;
+    scroll-snap-align: start;
+    animation: fadein 1s;
 }
 
 /* Additional styling for unselected buttons */
@@ -153,6 +144,9 @@
 .pokeball-img{
     transition-timing-function: ease;
     transition-duration: 0.5s;
+    position: absolute;
+    top: 120px;
+    right: -30px;
 }
 
 .pokemon:hover .image-poke{

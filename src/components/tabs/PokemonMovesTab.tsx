@@ -10,8 +10,8 @@ export const PokemonMovesTab: React.FC = () => {
 
     return (
         <div className={"pokemon-moves"}>
-            {moves.map((move: PokemonMove, index: number) => (
-                <PokemonMoveElement move={move} key={index} />
+            {moves.map((move: PokemonMove) => (
+                <PokemonMoveElement move={move} key={move.name} />
             ))}
         </div>
     );

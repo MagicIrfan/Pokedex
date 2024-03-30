@@ -35,17 +35,17 @@ class PokemonEvolutionChainBuilder{
     evolvesTo !: PokemonEvolutionChain[];
     details !: PokemonEvolutionDetail[];
 
-    withPokemon(pokemon : PokemonSpecie) : PokemonEvolutionChainBuilder{
+    withPokemon(pokemon : PokemonSpecie) : this{
         this.pokemon = pokemon;
         return this;
     }
 
-    withEvolvesTo(evolvesTo: PokemonEvolutionChain[]) : PokemonEvolutionChainBuilder{
+    withEvolvesTo(evolvesTo: PokemonEvolutionChain[]) : this{
         this.evolvesTo = evolvesTo;
         return this;
     }
 
-    withDetails(details : PokemonEvolutionDetail[]) : PokemonEvolutionChainBuilder{
+    withDetails(details : PokemonEvolutionDetail[]) : this{
         this.details = details;
         return this;
     }

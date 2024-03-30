@@ -1,4 +1,3 @@
-
 export class PokemonMove{
     private readonly _name:string;
     private readonly _description:string;
@@ -10,16 +9,16 @@ export class PokemonMove{
     private readonly _pokemonType:string;
     private readonly _target:string;
 
-    constructor(name: string, description: string, power: number, accuracy: number, pp: number, priority: number, moveType: string, pokemonType: string, target: string) {
-        this._name = name;
-        this._description = description;
-        this._power = power;
-        this._accuracy = accuracy;
-        this._pp = pp;
-        this._priority = priority;
-        this._moveType = moveType;
-        this._pokemonType = pokemonType;
-        this._target = target;
+    constructor(builder: PokemonMoveBuilder) {
+        this._name = builder.name;
+        this._description = builder.description;
+        this._power = builder.power;
+        this._accuracy = builder.accuracy;
+        this._pp = builder.pp;
+        this._priority = builder.priority;
+        this._moveType = builder.moveType;
+        this._pokemonType = builder.pokemonType;
+        this._target = builder.target;
     }
 
     get name(): string {
@@ -56,5 +55,82 @@ export class PokemonMove{
 
     get target(): string {
         return this._target;
+    }
+
+    public static builder(): PokemonMoveBuilder {
+        return new PokemonMoveBuilder();
+    }
+}
+
+export class PokemonMoveBuilder {
+    name: string;
+    description: string;
+    power: number;
+    accuracy: number;
+    pp: number;
+    priority: number;
+    moveType: string;
+    pokemonType: string;
+    target: string;
+
+    constructor() {
+        this.name = '';
+        this.description = '';
+        this.power = 0;
+        this.accuracy = 0;
+        this.pp = 0;
+        this.priority = 0;
+        this.moveType = '';
+        this.pokemonType = '';
+        this.target = '';
+    }
+
+    setName(name: string): this {
+        this.name = name;
+        return this;
+    }
+
+    setDescription(description: string): this {
+        this.description = description;
+        return this;
+    }
+
+    setPower(power: number): this {
+        this.power = power;
+        return this;
+    }
+
+    setAccuracy(accuracy: number): this {
+        this.accuracy = accuracy;
+        return this;
+    }
+
+    setPp(pp: number): this {
+        this.pp = pp;
+        return this;
+    }
+
+    setPriority(priority: number): this {
+        this.priority = priority;
+        return this;
+    }
+
+    setMoveType(moveType: string): this {
+        this.moveType = moveType;
+        return this;
+    }
+
+    setPokemonType(pokemonType: string): this {
+        this.pokemonType = pokemonType;
+        return this;
+    }
+
+    setTarget(target: string): this {
+        this.target = target;
+        return this;
+    }
+
+    build(): PokemonMove {
+        return new PokemonMove(this);
     }
 }
