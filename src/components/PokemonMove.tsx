@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import {PokemonMoveCharacteristic} from "./PokemonMoveCharacteristic";
 import {PokemonMoveTypeSVG} from "./PokemonMoveTypeSVG";
 import {PokemonMove as PokemonMoveModel} from "../models/PokemonMove";

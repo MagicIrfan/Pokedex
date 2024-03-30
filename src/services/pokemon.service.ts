@@ -1,6 +1,6 @@
 import axios from "axios";
 import Pokemon from "../models/Pokemon";
-import {DetailedPokemonBuilder} from "../models/DetailledPokemon";
+import DetailedPokemon, {DetailedPokemonBuilder} from "../models/DetailledPokemon";
 import GenderRate from "../models/GenderRate";
 import {PokemonEvolutionChain} from "../models/PokemonEvolutionChain";
 import {PokemonEvolutionDetail} from "../models/PokemonEvolutionDetail";
@@ -9,7 +9,7 @@ import PokemonSpecie from "../models/PokemonSpecie";
 import {PokemonStatistics} from "../models/PokemonStatistics";
 
 
-export const fetchData = async (url: string) => {
+export const fetchData = async (url: string) : Promise<any> => {
     try {
         const response = await axios.get(url);
         if (response.status === 200 && response.data) {
@@ -31,7 +31,7 @@ export const getAllPokemons = async (): Promise<Pokemon[]> => {
     return allPokemonsResults.filter((pokemon): pokemon is Pokemon => pokemon !== null);
 };
 
-export const getPokemon = async (id: number | string) => {
+export const getPokemon = async (id: number | string) : Promise<Pokemon | null> => {
     const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
     if (response) {
         const {id, name, types} = response;
@@ -40,7 +40,7 @@ export const getPokemon = async (id: number | string) => {
     return null;
 };
 
-export const getPokemonSpecie = async (url: string) => {
+export const getPokemonSpecie = async (url: string) : Promise<PokemonSpecie | null> => {
     const response = await fetchData(url);
     if (response) {
         const {id, name} = response;
@@ -49,9 +49,9 @@ export const getPokemonSpecie = async (url: string) => {
     return null;
 };
 
-export const getDetailedPokemon = async (id: number) => {
+export const getDetailedPokemon = async (id: number) : Promise<DetailedPokemon | null> => {
     try {
-        const detailedPokemonBuilder = new DetailedPokemonBuilder();
+        const detailedPokemonBuilder : DetailedPokemonBuilder = new DetailedPokemonBuilder();
 
         const [responsePokemon, responseDetailedPokemon] = await Promise.all([
             fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`),
@@ -81,8 +81,8 @@ export const getDetailedPokemon = async (id: number) => {
 
         if (responseDetailedPokemon) {
             const {base_happiness, capture_rate, flavor_text_entries, shape, egg_groups, genera, gender_rate, growth_rate, evolution_chain} = responseDetailedPokemon;
-            const description = flavor_text_entries.find((entry: any) => entry.language.name === "en")?.flavor_text ?? "";
-            const genus = genera.find((entry: any) => entry.language.name === "en")?.genus ?? "";
+            const description = flavor_text_entries.find((entry: any) : boolean => entry.language.name === "en")?.flavor_text ?? "";
+            const genus = genera.find((entry: any) : boolean => entry.language.name === "en")?.genus ?? "";
             const pokeEggGroup = egg_groups.map((egg_group: any) => egg_group.name);
             detailedPokemonBuilder
                 .withBaseHappiness(base_happiness)
@@ -144,13 +144,13 @@ export const getPokemonMove = async (url: string): Promise<PokemonMove | null> =
     const data = await fetchData(url);
     if (data) {
         const {accuracy, power, pp, priority, name, target, type, effect_entries, damage_class} = data;
-        const effect: string = effect_entries.find((effect_entry: any) => effect_entry.language.name === "en")?.effect ?? "";
+        const effect: string = effect_entries.find((effect_entry: any) : boolean => effect_entry.language.name === "en")?.effect ?? "";
         return new PokemonMove(name, effect, power, accuracy, pp, priority, damage_class.name, type.name, target.name);
     }
     return null;
 };
 
-export const getPokemonLocationsArea = async (id : number) => {
+export const getPokemonLocationsArea = async (id : number) : Promise<string[]> => {
     const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`);
     return response ? response.map((locationArea : any) => locationArea.location_area.name) : [];
 }
