@@ -14,7 +14,7 @@ export const PokemonLocationsTab: React.FC = () => {
                 overflowY: 'scroll',
                 maxHeight: '500px'
             }}>
-                {locations.map((locationName: string, index: number) => (
+                {locations.map((locationName: string) => (
                     <PokemonLocation key={locationName} locationName={locationName} />
                 ))}
             </div>

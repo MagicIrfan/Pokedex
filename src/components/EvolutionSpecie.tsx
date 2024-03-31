@@ -32,10 +32,10 @@ interface EvolutionSpecieProps {
 
 // Fonction pour générer les composants d'évolution
 const generateEvolutionComponents = (evolutions: PokemonEvolutionChain[]) => {
-    const finalComponents : JSX.Element[] = [];
-    const firstStageComponents : JSX.Element[] = [];
-    const secondStageComponents : JSX.Element[] = [];
-    const generateEvolutionStageComponent = (components : JSX.Element[], key:number) => {
+    const finalComponents : Element[] = [];
+    const firstStageComponents : Element[] = [];
+    const secondStageComponents : Element[] = [];
+    const generateEvolutionStageComponent = (components : Element[], key:number) => {
         return (
             <div style={{
                 display: 'flex',

@@ -9,9 +9,9 @@ import PokemonSpecie from "../models/PokemonSpecie";
 import {PokemonStatistics} from "../models/PokemonStatistics";
 
 
-export const fetchData = async (url: string) : Promise<any> => {
+export const fetchData = async <T>(url: string) : Promise<T | null> => {
     try {
-        const response = await axios.get(url);
+        const response = await axios.get<T>(url);
         if (response.status === 200 && response.data) {
             return response.data;
         }
@@ -32,7 +32,7 @@ export const getAllPokemons = async (): Promise<Pokemon[]> => {
 };
 
 export const getPokemon = async (id: number | string) : Promise<Pokemon | null> => {
-    const response = await fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    const response = await fetchData<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}/`);
     if (response) {
         const {id, name, types} = response;
         return new Pokemon(id, name, types.map((apiType:any) => apiType.type.name));
@@ -41,7 +41,7 @@ export const getPokemon = async (id: number | string) : Promise<Pokemon | null> 
 };
 
 export const getPokemonSpecie = async (url: string) : Promise<PokemonSpecie | null> => {
-    const response = await fetchData(url);
+    const response = await fetchData<PokemonSpecie>(url);
     if (response) {
         const {id, name} = response;
         return new PokemonSpecie(id, name);
@@ -54,8 +54,8 @@ export const getDetailedPokemon = async (id: number) : Promise<DetailedPokemon |
         const detailedPokemonBuilder : DetailedPokemonBuilder = new DetailedPokemonBuilder();
 
         const [responsePokemon, responseDetailedPokemon] = await Promise.all([
-            fetchData(`https://pokeapi.co/api/v2/pokemon/${id}/`),
-            fetchData(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+            fetchData<DetailedPokemon>(`https://pokeapi.co/api/v2/pokemon/${id}/`),
+            fetchData<DetailedPokemon>(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
         ]);
 
         if (responsePokemon) {
@@ -71,11 +71,11 @@ export const getDetailedPokemon = async (id: number) : Promise<DetailedPokemon |
                 .withName(name)
                 .withWeight(weight)
                 .withHeight(height)
-                .withTypes(types.map((apiType: { type: { name: any; }; }) => apiType.type.name))
+                .withTypes(types.map((apiType: { type: { name: string; }; }) => apiType.type.name))
                 .withAbilities(abilities.map((ability: { ability: { name: any; }; }) => ability.ability.name))
                 .withStatistics(new PokemonStatistics(stats.map((stat: { base_stat: any; }) => stat.base_stat)))
                 .withCry(cries.latest)
-                .withMoves(pokemonMoves)
+                .withMoves(pokemonMoves as PokemonMove[])
                 .withLocations(pokemonLocationsArea);
         }
 
