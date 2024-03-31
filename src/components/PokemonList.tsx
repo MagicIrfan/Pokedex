@@ -1,4 +1,4 @@
-import React, { useMemo, Suspense } from 'react';
+import React, { useMemo} from 'react';
 import {getAllPokemons} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
 import {useQuery} from "react-query";
