@@ -2,8 +2,7 @@ import React, { useMemo} from 'react';
 import {getAllPokemons} from "../services/pokemon.service";
 import Pokemon from "../models/Pokemon";
 import {useQuery} from "react-query";
-
-const PokemonCard = React.lazy(() => import('./PokemonCard'));
+import {PokemonCard} from "./PokemonCard";
 
 interface PokemonListProps {
     name: string;
@@ -21,7 +20,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
             pokemon.name.includes(name) &&
             (typeName !== "all" ? pokemon.types.some((typeInfo : string) : boolean => typeInfo.toLowerCase() === typeName.toLowerCase()) : true)
         );
-    }, [name, typeName]);
+    }, [pokemons,name, typeName]);
 
     const listItems = filteredPokemons.map((pokemon: Pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon}/>

@@ -10,7 +10,7 @@ export interface PokemonProps {
     pokemon:Pokemon;
 }
 
-const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
+export const PokemonCard: React.FC<PokemonProps> = ({ pokemon }) => {
     const { types, id, name } = pokemon;
     const navigate: NavigateFunction = useNavigate();
 
@@ -45,5 +45,3 @@ const PokemonComponent: React.FC<PokemonProps> = ({ pokemon }) => {
         </div>
     );
 };
-
-export default PokemonComponent;
