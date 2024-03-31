@@ -34,6 +34,7 @@
 .pokemon{
     position: relative;
     width:18em;
+    height:18em;
     border-radius: 20px;
     border: 1px solid lightgray;
     padding-right: 14px;

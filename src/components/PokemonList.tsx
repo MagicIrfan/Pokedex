@@ -21,12 +21,10 @@ const PokemonList: React.FC<PokemonListProps> = ({ name, typeName }) => {
             pokemon.name.includes(name) &&
             (typeName !== "all" ? pokemon.types.some((typeInfo : string) : boolean => typeInfo.toLowerCase() === typeName.toLowerCase()) : true)
         );
-    }, [pokemons, name, typeName]);
+    }, [name, typeName]);
 
     const listItems = filteredPokemons.map((pokemon: Pokemon) => (
-        <Suspense key={pokemon.id} fallback={<div>Loading...</div>}>
-            <PokemonCard pokemon={pokemon}/>
-        </Suspense>
+        <PokemonCard key={pokemon.id} pokemon={pokemon}/>
     ));
 
     return (
