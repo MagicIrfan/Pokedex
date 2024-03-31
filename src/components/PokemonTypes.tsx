@@ -3,7 +3,7 @@ import {PokemonTypeComponent} from "./PokemonTypeComponent"
 
 interface PokemonTypesProps {
     types:string[];
-    style?:any;
+    style?:React.CSSProperties;
     colored?:boolean;
 }
 export const PokemonTypes : React.FC<PokemonTypesProps> = ({types, style = {}, colored = false}) => {
