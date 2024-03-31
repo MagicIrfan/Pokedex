@@ -3,7 +3,7 @@ import {capitalize} from "../utils/string";
 
 interface PokemonTypeProps {
     type:string;
-    style?:any;
+    style?:React.CSSProperties;
     colored?:boolean;
 }
 export const PokemonTypeComponent : React.FC<PokemonTypeProps> = ({type, style = {}, colored = false}) => {
