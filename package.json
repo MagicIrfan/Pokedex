@@ -2,6 +2,7 @@
   "name": "pokedex",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://magicirfan.github.io/Pokedex/",
   "type": "module",
   "scripts": {
     "dev": "vite",
